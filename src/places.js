@@ -1,0 +1,23 @@
+// Site-centre points, not entrances. Provisional difficulty and Welsh copy await local review.
+export const places = [
+  { id: 'cardigan-castle', difficulty: 1, coord: [-4.66061, 52.08158],
+    en: { name: 'The Castle', town: 'Cardigan', fact: 'In 1176, Lord Rhys held a gathering of poets and musicians here — remembered as the first eisteddfod.' },
+    cy: { name: 'Y Castell', town: 'Aberteifi', fact: 'Yn 1176, cynhaliodd yr Arglwydd Rhys gyfarfod o feirdd a cherddorion yma — yr eisteddfod gyntaf.' },
+    source: 'https://cardigancastle.com/', coordinateSource: 'https://www.openstreetmap.org/way/568794249' },
+  { id: 'st-dogmaels-abbey', difficulty: 2, coord: [-4.68035, 52.08054],
+    en: { name: 'The Abbey', town: 'St Dogmaels', fact: 'Founded in 1115, this abbey belonged to the Tironensian order. Its surviving ruins sit in the heart of the village.' },
+    cy: { name: 'Yr Abaty', town: 'Llandudoch', fact: 'Sefydlwyd yr abaty hwn yn 1115 ar gyfer urdd Tiron. Mae ei adfeilion yng nghanol y pentref.' },
+    source: 'https://cadwpublic-api.azurewebsites.net/reports/sam/FullReport?id=2675&lang=en', coordinateSource: 'https://www.openstreetmap.org/way/305512212' },
+  { id: 'cliff-hotel', difficulty: 3, coord: [-4.68772, 52.11826],
+    en: { name: 'The Cliff Hotel', town: 'Gwbert', fact: 'The hotel stands on the coast at Gwbert, looking across the mouth of the Teifi towards Poppit Sands.' },
+    cy: { name: 'Gwesty’r Cliff', town: 'Gwbert', fact: 'Saif y gwesty ar yr arfordir yng Ngwbert, yn edrych dros aber Afon Teifi tuag at Draeth Poppit.' },
+    source: 'https://cliffhotel.com/', coordinateSource: 'https://www.openstreetmap.org/way/305512859' },
+  { id: 'cilgerran-castle', difficulty: 3, coord: [-4.6342, 52.0569],
+    en: { name: 'The Castle', town: 'Cilgerran', fact: 'Two great round towers overlook the Teifi gorge and the Plysog stream — a dramatic defensive position.' },
+    cy: { name: 'Y Castell', town: 'Cilgerran', fact: 'Mae dau dŵr crwn mawr yn edrych dros geunant Afon Teifi a nant Plysog — safle amddiffynnol trawiadol.' },
+    source: 'https://cadw.gov.wales/visit/places-to-visit/castell-cilgerran', coordinateSource: 'https://en.wikipedia.org/wiki/Cilgerran_Castle' },
+  { id: 'mwldan', difficulty: 2, coord: [-4.6607, 52.0859389],
+    en: { name: 'Mwldan', town: 'Cardigan', fact: 'Mwldan is Cardigan’s arts centre and cinema, bringing film, live performance and visual art to the town.' },
+    cy: { name: 'Mwldan', town: 'Aberteifi', fact: 'Mwldan yw canolfan gelfyddydau a sinema Aberteifi, gyda ffilmiau, perfformiadau byw a chelf weledol.' },
+    source: 'https://www.mwldan.co.uk/', coordinateSource: 'https://www.wikidata.org/wiki/Q39011525' },
+];

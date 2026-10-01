@@ -1,0 +1,27 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TeifiTap map boundary regression</title><style>body{font:14px system-ui}#map{width:390px;height:560px;}pre{white-space:pre-wrap}</style></head><body><h1>Map boundary regression</h1><pre id="result">Running…</pre><div id="map"></div><script type="module">
+import {Map,setWorkerUrl} from 'maplibre-gl';
+import worker from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
+import 'maplibre-gl/dist/maplibre-gl.css';
+import {cameraOptions} from '../src/map-camera.js';
+import {bounds} from '../src/map-style.js';
+import {places} from '../src/places.js';
+setWorkerUrl(worker);
+const map = new Map({container:'map',style:{version:8,sources:{},layers:[{id:'paper',type:'background',paint:{'background-color':'#eee8d9'}}]},...cameraOptions});
+map.on('load',()=>{
+  const failures=[];let count=0;
+  const corners=[bounds[0],bounds[1],[bounds[0][0],bounds[1][1]],[bounds[1][0],bounds[0][1]]];
+  for(const [w,h] of [[390,560],[320,420],[1200,720]]){
+    const element=document.querySelector('#map');element.style.width=`${w}px`;element.style.height=`${h}px`;map.resize();
+    for(const zoom of [11,12.65,16,18])for(const target of [...places.map(p=>p.coord),...corners]){
+      map.jumpTo({center:target,zoom});
+      const actual=map.getCenter();const point=map.project(target);const box=element.getBoundingClientRect();
+      if(Math.abs(actual.lng-target[0])>1e-7||Math.abs(actual.lat-target[1])>1e-7||Math.abs(point.x-box.width/2)>0.1||Math.abs(point.y-box.height/2)>0.1)failures.push(`Cannot centre ${target} at ${w}x${h}, z${zoom}`);
+      count++;
+    }
+    map.jumpTo({center:[-5,53],zoom:12});
+    if(Math.abs(map.getCenter().lng-bounds[0][0])>1e-7||Math.abs(map.getCenter().lat-bounds[1][1])>1e-7)failures.push('Outside point not clamped');
+  }
+  document.querySelector('#result').textContent=failures.length?`FAIL\n${failures.join('\n')}`:`PASS: ${count} target/corner/zoom/viewport combinations centred correctly; outside centres constrained. Includes Cilgerran Castle and the Cliff Hotel.`;
+});
+</script></body></html>
+
