@@ -20,8 +20,6 @@ A daily geography guessing game for friends and family, set in Cardigan and its 
 
 The minimum playable application runs locally. Three daily rounds, geometry-only map, fixed centre pin, English/Welsh toggle, short factual rewards, weighted results, copy/native sharing and independent practice mode are implemented. Photos, streaks/history and street bonuses remain later work.
 
-## Run locally
-
 ## Online testing
 
 GitHub Pages address: https://unholy-smoke.github.io/teifitap/
