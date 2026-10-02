@@ -1,6 +1,7 @@
 import { bounds } from './map-style.js';
 export const CATALOGUE_KEY = 'teifitap.catalogue-edits.v1';
 export function validateEdit(p) {
+  if (p.reviewStatus !== undefined && !['locally-reviewed','needs-local-review'].includes(p.reviewStatus)) return 'Choose a valid review status.';
   if (![1,2,3].includes(p.difficulty)) return 'Choose difficulty 1, 2 or 3.';
   for (const lang of ['en','cy']) for (const field of ['name','town','fact']) {
     if (typeof p[lang]?.[field] !== 'string' || !p[lang][field].trim()) return 'Fill in both languages, including the town and fact.';
@@ -9,7 +10,7 @@ export function validateEdit(p) {
   return '';
 }
 export function editableFields(p) {
-  return { difficulty:p.difficulty, coord:[...p.coord], en:{...p.en}, cy:{...p.cy} };
+  return { difficulty:p.difficulty, coord:[...p.coord], en:{...p.en}, cy:{...p.cy}, ...(['locally-reviewed','needs-local-review'].includes(p.reviewStatus) ? {reviewStatus:p.reviewStatus} : {}) };
 }
 export function applyEdits(catalogue, edits = {}) {
   return { ...catalogue, places: catalogue.places.map(p => {

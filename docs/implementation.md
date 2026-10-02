@@ -63,3 +63,9 @@ See src/places.js for per-record source and coordinate links. Five points are Ca
 Published `data/daily-schedule.json` freezes seven daily puzzles, with distinct point IDs across the entire schedule, one at each difficulty. This ledger, rather than individual players’ storage, prevents repeat allocation and preserves shared puzzles. Extend by appending unused IDs and retaining past records. When dates run out, retain the final dated puzzle and show an explicit notice; never silently recycle.
 
 `src/daily.js` validates date-indexed browser history against the schedule and derives completed-day count and current streak. The launch key is separate from earlier test storage. Practice reads local catalogue edits and never writes daily history. Scheduled daily prompts use frozen published snapshots, unaffected by draft edits. No cross-device accounts or result-history browsing UI yet.
+
+## Research batch and confirmation
+
+Catalogue expanded from 33 to 54 with 21 independently researched records at `discoveryBatch: research-2026-10-02`, seven at each provisional difficulty. Original IDs and records remain stable. Each addition has a fact URL, OSM feature coordinate URL, bilingual draft copy and specific review notes. Existing scheduled snapshots do not change. Counts are derived at runtime rather than fixed at 33.
+
+The editor accepts a local `reviewStatus` patch (`needs-local-review` or `locally-reviewed`), clears confirmation when editable fields or the pin change, and includes it in exports. A direct `?place=ID` link selects a record; the new-batch button jumps to the first new candidate. The scheduling helper rejects unreviewed new research and all area targets. Browser regression covers confirmation saving, reload and invalidation on editing as well as the existing export flow.

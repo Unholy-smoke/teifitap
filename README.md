@@ -44,13 +44,13 @@ npm test
 npm run build
 ```
 
-The production build is in dist/. No account, API key or backend is needed for this version. Fourteen unit tests cover dates/DST, scoring, saved-state validation, round flow, deterministic selection, catalogue completeness and map constraints. Open /test/map-boundaries.html on the development server for a real MapLibre geometry regression covering target/corner reachability and responsive zoom limits across viewport dimensions.
+The production build is in dist/. No account, API key or backend is needed for this version. Fifteen unit tests cover dates/DST, scoring, saved-state validation, round flow, deterministic selection, catalogue completeness and map constraints. Open /test/map-boundaries.html on the development server for a real MapLibre geometry regression covering target/corner reachability and responsive zoom limits across viewport dimensions.
 
 Open /test/mobile-gestures.html at a phone-sized viewport for the touch regression. It sends continuous one-finger drag and two-finger pinch events through the real app, checks movement across successive frames, and rejects map resizing during either gesture. This browser test supplements physical-phone testing.
 
 ## Map and content
 
-The first expanded [JSON catalogue](data/location-catalogue.json) contains 33 researched owner-supplied candidates at difficulties 1–3. Each has English/Welsh copy, source links, a reference coordinate and review notes. Practice draws one random candidate at each difficulty; the daily game uses the published dated schedule. See the [readable catalogue](docs/location-catalogue.md), regenerated with `node scripts/render-catalogue.js`, or open `/catalogue.html` to edit names, towns and facts in both languages, difficulty and location. Drag the pin or tap the map to move it. The page contains spoilers and is deliberately not linked from the game.
+The first expanded [JSON catalogue](data/location-catalogue.json) contains 54 researched candidates: the original 33 owner-supplied locations and 21 additional research drafts at difficulties 1–3. Each has English/Welsh copy, source links, a reference coordinate and review notes. Practice draws one random candidate at each difficulty; the daily game uses the published dated schedule. See the [readable catalogue](docs/location-catalogue.md), regenerated with `node scripts/render-catalogue.js`, or open `/catalogue.html` to edit names, towns and facts in both languages, difficulty and location. Drag the pin or tap the map to move it. The page contains spoilers and is deliberately not linked from the game.
 
 Catalogue edits save in this browser and apply to new practice games on the same origin. They do not update GitHub or other devices automatically. Download the edited JSON and return it for publishing. Navigating between places saves valid edits; invalid coordinates or blank fields must be corrected first. Open `/test/catalogue-editor.html` locally to verify persistence and export without retaining test edits.
 
@@ -71,3 +71,9 @@ See [reference observations](docs/maptap-observations.md), [development brief](d
 The first scheduled release has a separate storage key (`teifitap.scheduled-days.v1`) so pre-launch test scores do not count as the family puzzle. Original test storage is retained. Daily answers, completed results and streaks remain on the same browser/origin only; practice does not change them. Clearing site data or switching devices starts a new record. Midnight follows Europe/London.
 
 Use `node scripts/add-daily.js YYYY-MM-DD EASY_ID MEDIUM_ID HARD_ID` to append the next date: it rejects repeated IDs, wrong difficulties and area targets. Run tests before publishing. The local `/test/daily-history.html` browser regression verifies completion, reload, practice isolation and streak display, then restores existing browser history.
+
+## Independent research batch
+
+21 additions researched on 2 October 2026, seven suggested targets at each difficulty. They cover Cardigan, St Dogmaels, Poppit, Cilgerran and Llangoedmor. All pins fit the present bounds. Use **Start the new research batch** in the editor; new entries are labelled in the selector. Facts and Welsh wording are drafts with fact/coordinate links and review notes. Mark **Reviewed** once pin, both languages and difficulty are checked; further edits clear the tick. The exported JSON retains review status. New research records must be reviewed before `scripts/add-daily.js` accepts them; area targets still need scoring boundaries. Current published puzzles stay frozen.
+
+Close targets (Guildhall/cannon, mermaid/path marker, and Poppit café/lifeboat station) have explicit overlap notes: current full marks within 50 m can make them effectively the same question. Kingfisher Hide has an older mapped reference after a rebuild; check it locally. Crwst’s Priory Street café is distinguished from its production bakery and Poppit branch.

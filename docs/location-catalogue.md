@@ -1,18 +1,18 @@
 # TeifiTap location catalogue
 
-Researched 2026-10-02. 33 owner-supplied candidates: 9 at difficulty 1, 13 at difficulty 2, 11 at difficulty 3.
+Researched 2026-10-02. 54 candidates: 16 at difficulty 1, 20 at difficulty 2, 18 at difficulty 3.
 
 JSON is the source of truth. This Markdown is generated with `node scripts/render-catalogue.js`.
 
 Open [the map review page](https://unholy-smoke.github.io/teifitap/catalogue.html) to inspect each pin and both languages. It contains answers, so review after playing.
 
-These are research drafts, separate from the existing five-place daily pool. All candidates have a sourced reference point and a short factual reward. Building points use OSM geometry where possible; reference points for areas are not fair scoring targets. The remaining work is local pin/wording review and agreed area boundaries, then enabling the records in the game.
+These are research drafts, separate from the published daily schedule. All candidates have a sourced reference point and a short factual reward. Building points use OSM geometry where possible; reference points for areas are not fair scoring targets. The remaining work is local pin/wording review and agreed area boundaries, then enabling the records in the game.
 
 **Coordinate order:** longitude, latitude. OSM geometry centres are bounding-box centres, not surveyed entrances. Welsh text is a draft for local review. Photos can follow.
 
 OSM coordinates and geometry © OpenStreetMap contributors, ODbL 1.0. Documentary coordinates have individual sources.
 
-Penparc’s village reference point is already inside the map. All 33 reference points fit the current playable bounds; eastern Penparc outskirts need consideration when drawing its accepted area.
+Penparc’s village reference point is already inside the map. All 54 reference points fit the current playable bounds; eastern Penparc outskirts need consideration when drawing its accepted area.
 
 ## 1. Cardigan Rugby Club — Cardigan
 
@@ -475,3 +475,297 @@ Difficulty **3** · Point target · Research draft
 **Sources:** [fact](https://www.yell.com/biz/tivy-tyres-cardigan-8961642/) · [coordinates](https://www.openstreetmap.org/way/607382060)
 
 **Review:** Business spelling is Tivy Tyres. OSM records an outdated address on its Facebook page; use the mapped Station Yard building, not an old Pentood unit.
+
+## 34. Cardigan Guildhall — Cardigan
+
+Difficulty **1** · Point target · Research draft
+
+**English:** The Guildhall and adjoining market halls were built in 1858–60 as a new civic centre for the town.
+
+**Cymraeg:** Neuadd y Dref Aberteifi, Aberteifi. Adeiladwyd Neuadd y Dref a’r neuaddau marchnad cyfagos yn 1858–60 fel canolfan ddinesig newydd i’r dref.
+
+**Reference pin:** -4.6609625, 52.0838258 ([map](https://www.openstreetmap.org/?mlat=52.0838258&mlon=-4.6609625#map=18/52.0838258/-4.6609625)) · OSM geometry bounding-box centre
+
+**Sources:** [fact](https://historypoints.org/index.php?page=guildhall-and-market-halls-cardigan) · [coordinates](https://www.openstreetmap.org/way/319383034)
+
+**Review:** Aim for the Guildhall building, rather than the market hall behind it. The cannon is a separate nearby candidate. Suggested difficulty and Welsh wording need local review.
+
+## 35. Cardigan Bridge (old town bridge) — Cardigan
+
+Difficulty **1** · Point target · Research draft
+
+**English:** Cardigan’s old bridge crosses the Teifi beside the castle. A river crossing here was part of the medieval town.
+
+**Cymraeg:** Pont Aberteifi (hen bont y dref), Aberteifi. Mae hen bont Aberteifi yn croesi’r Teifi wrth y castell. Roedd croesfan dros yr afon yma yn rhan o’r dref ganoloesol.
+
+**Reference pin:** -4.66069, 52.0806545 ([map](https://www.openstreetmap.org/?mlat=52.0806545&mlon=-4.66069#map=18/52.0806545/-4.66069)) · OSM geometry bounding-box centre
+
+**Sources:** [fact](https://heneb.org.uk/hcla/lower-teifi-valley/cardigan/) · [coordinates](https://www.openstreetmap.org/way/840263499)
+
+**Review:** Pin is the middle of the old bridge, not the A487 bypass bridge. Suggested difficulty and Welsh wording need local review.
+
+## 36. Y Felin watermill — St Dogmaels
+
+Difficulty **1** · Point target · Research draft
+
+**English:** Y Felin still uses water power to grind flour with millstones. The mill was restored in the late 1970s.
+
+**Cymraeg:** Y Felin, Llandudoch. Mae Y Felin yn dal i ddefnyddio pŵer dŵr i falu blawd â meini melin. Adferwyd y felin ddiwedd y 1970au.
+
+**Reference pin:** -4.6789728, 52.0810902 ([map](https://www.openstreetmap.org/?mlat=52.0810902&mlon=-4.6789728#map=18/52.0810902/-4.6789728)) · OSM geometry bounding-box centre
+
+**Sources:** [fact](https://www.y-felin.com/) · [coordinates](https://www.openstreetmap.org/way/598590010)
+
+**Review:** Pin is the mill building, not its pond. Close to the abbey: check whether difficulty 1 is appropriate. Suggested difficulty and Welsh wording need local review.
+
+## 37. RNLI Lifeboat Station — Poppit Sands
+
+Difficulty **1** · Point target · Research draft
+
+**English:** Cardigan’s two inshore lifeboats launch from Poppit Sands and cover the tidal Teifi as well as the coast.
+
+**Cymraeg:** Gorsaf Bad Achub yr RNLI, Traeth Poppit. Mae dau fad achub glannau Aberteifi yn lansio o Draeth Poppit ac yn gwasanaethu rhan lanwol y Teifi yn ogystal â’r arfordir.
+
+**Reference pin:** -4.6995636, 52.1047562 ([map](https://www.openstreetmap.org/?mlat=52.1047562&mlon=-4.6995636#map=18/52.1047562/-4.6995636)) · OSM geometry bounding-box centre
+
+**Sources:** [fact](https://rnli.org/find-my-nearest/lifeboat-stations/cardigan-lifeboat-station) · [coordinates](https://www.openstreetmap.org/way/172056302)
+
+**Review:** Pin is the present station building. Do not confuse it with the old lifeboat house at Cei Bach. Suggested difficulty and Welsh wording need local review.
+
+## 38. Crwst café, Priory Street — Cardigan
+
+Difficulty **1** · Point target · Research draft
+
+**English:** Crwst’s Cardigan café serves coffee, pastries and brunch. Its pastries and dishes are made in-house using locally sourced ingredients.
+
+**Cymraeg:** Caffi Crwst, Stryd y Priordy, Aberteifi. Mae caffi Crwst yn Aberteifi yn gweini coffi, teisennau a brecinio. Gwneir y teisennau a’r prydau yn y caffi gan ddefnyddio cynhwysion lleol.
+
+**Reference pin:** -4.6589728, 52.0832431 ([map](https://www.openstreetmap.org/?mlat=52.0832431&mlon=-4.6589728#map=18/52.0832431/-4.6589728)) · OSM geometry bounding-box centre
+
+**Sources:** [fact](https://www.visitwales.com/things-do/food-and-drink/places-eat-and-drink/coffee-break-welsh-independent-cafe) · [coordinates](https://www.openstreetmap.org/way/529007245)
+
+**Review:** This is the Priory Street café, not the production bakery at Parc Teifi or the Poppit café. Suggested difficulty and Welsh wording need local review.
+
+## 39. Teifi Leisure Centre — Cardigan
+
+Difficulty **1** · Point target · Research draft
+
+**English:** Teifi Leisure Centre is run by Ceredigion Actif and offers fitness classes and a fitness suite.
+
+**Cymraeg:** Canolfan Hamdden Teifi, Aberteifi. Mae Canolfan Hamdden Teifi yn cael ei rhedeg gan Ceredigion Actif ac yn cynnig dosbarthiadau ffitrwydd ac ystafell ffitrwydd.
+
+**Reference pin:** -4.6566679, 52.0888341 ([map](https://www.openstreetmap.org/?mlat=52.0888341&mlon=-4.6566679#map=18/52.0888341/-4.6566679)) · OSM mapped node
+
+**Sources:** [fact](https://www.ceredigionactif.org.uk/cardigan.html) · [coordinates](https://www.openstreetmap.org/node/8526410674)
+
+**Review:** OSM node is a provisional reference point. Check the exact building pin; avoid treating the whole adjoining school campus as the target. Suggested difficulty and Welsh wording need local review.
+
+## 40. Small World Theatre — Cardigan
+
+Difficulty **1** · Point target · Research draft
+
+**English:** Small World Theatre brings people together through puppetry, performance and creative programmes. Its Cardigan venue also hosts aerial classes.
+
+**Cymraeg:** Theatr Byd Bach, Aberteifi. Mae Theatr Byd Bach yn dod â phobl ynghyd drwy bypedwaith, perfformiadau a rhaglenni creadigol. Mae ei lleoliad yn Aberteifi hefyd yn cynnal dosbarthiadau awyr.
+
+**Reference pin:** -4.6598724, 52.0858263 ([map](https://www.openstreetmap.org/?mlat=52.0858263&mlon=-4.6598724#map=18/52.0858263/-4.6598724)) · OSM geometry bounding-box centre
+
+**Sources:** [fact](https://www.smallworld.org.uk/) · [coordinates](https://www.openstreetmap.org/way/518580297)
+
+**Review:** OSM uses Theatr Byd Bychan; the current organisation website uses Theatr Byd Bach. Welsh name follows the official website. Suggested difficulty and Welsh wording need local review.
+
+## 41. St Mary’s Church — Cardigan
+
+Difficulty **2** · Point target · Research draft
+
+**English:** St Mary’s has a fourteenth-century chancel. Its west tower was rebuilt in 1748.
+
+**Cymraeg:** Eglwys y Santes Fair, Aberteifi. Mae gan Eglwys y Santes Fair gangell o’r bedwaredd ganrif ar ddeg. Ailadeiladwyd ei thŵr gorllewinol yn 1748.
+
+**Reference pin:** -4.6561472, 52.0827745 ([map](https://www.openstreetmap.org/?mlat=52.0827745&mlon=-4.6561472#map=18/52.0827745/-4.6561472)) · OSM geometry bounding-box centre
+
+**Sources:** [fact](https://heneb.org.uk/hcla/lower-teifi-valley/cardigan/) · [coordinates](https://www.openstreetmap.org/way/139440590)
+
+**Review:** Pin is the church building, not the surrounding churchyard. Suggested difficulty and Welsh wording need local review.
+
+## 42. Cardigan Library — Cardigan
+
+Difficulty **2** · Point target · Research draft
+
+**English:** Cardigan Library is in the council offices on Morgan Street. Its collections include the Tivy-Side newspaper on microfilm.
+
+**Cymraeg:** Llyfrgell Aberteifi, Aberteifi. Mae Llyfrgell Aberteifi yn swyddfeydd y cyngor ar Stryd Morgan. Mae ei chasgliadau’n cynnwys papur newydd y Tivy-Side ar ficroffilm.
+
+**Reference pin:** -4.6585941, 52.083166 ([map](https://www.openstreetmap.org/?mlat=52.083166&mlon=-4.6585941#map=18/52.083166/-4.6585941)) · OSM mapped node
+
+**Sources:** [fact](https://www.ceredigion.gov.uk/resident/tourism-leisure/ceredigion-library/branch-locations/cardigan/) · [coordinates](https://www.openstreetmap.org/node/5139658222)
+
+**Review:** Check the shared council-office/library building pin. This is the Morgan Street location. Suggested difficulty and Welsh wording need local review.
+
+## 43. Crwst beach café — Poppit Sands
+
+Difficulty **2** · Point target · Research draft
+
+**English:** Crwst has a café beside Poppit Sands, serving pastries, filled rolls, drinks and ice cream near the beach.
+
+**Cymraeg:** Caffi traeth Crwst, Traeth Poppit. Mae gan Crwst gaffi wrth Draeth Poppit, yn gweini teisennau, rholiau wedi eu llenwi, diodydd a hufen iâ ger y traeth.
+
+**Reference pin:** -4.6999236, 52.1043665 ([map](https://www.openstreetmap.org/?mlat=52.1043665&mlon=-4.6999236#map=18/52.1043665/-4.6999236)) · OSM geometry bounding-box centre
+
+**Sources:** [fact](https://www.discoverceredigion.wales/media/2849/eating-out-cardigan-surrounding-area-april-2026-pdf.pdf) · [coordinates](https://www.openstreetmap.org/way/172056303)
+
+**Review:** Pin is the café building, not the car park or the nearby lifeboat station. Close neighbours within the current 50 m scoring tolerance. Suggested difficulty and Welsh wording need local review.
+
+## 44. St Thomas’ Church — St Dogmaels
+
+Difficulty **2** · Point target · Research draft
+
+**English:** St Thomas’ Church was built in 1847 within the abbey precincts, using stone from the ruined abbey buildings.
+
+**Cymraeg:** Eglwys Sant Thomas, Llandudoch. Adeiladwyd Eglwys Sant Thomas yn 1847 o fewn tiroedd yr abaty, gan ddefnyddio cerrig o adfeilion adeiladau’r abaty.
+
+**Reference pin:** -4.6806994, 52.0810427 ([map](https://www.openstreetmap.org/?mlat=52.0810427&mlon=-4.6806994#map=18/52.0810427/-4.6806994)) · OSM geometry bounding-box centre
+
+**Sources:** [fact](https://coflein.gov.uk/en/site/401267/) · [coordinates](https://www.openstreetmap.org/way/305150196)
+
+**Review:** Pin is the parish church, not the abbey ruins or the Coach House. These targets are close together. Suggested difficulty and Welsh wording need local review.
+
+## 45. Yr Hen Printworks — Cardigan
+
+Difficulty **2** · Point target · Research draft
+
+**English:** Before becoming a restaurant in 2021, this building was Hope Chapel and later a printworks where the Tivyside newspaper was printed.
+
+**Cymraeg:** Yr Hen Printworks, Aberteifi. Cyn dod yn fwyty yn 2021, roedd yr adeilad hwn yn Gapel Hope ac yn ddiweddarach yn argraffdy lle argraffwyd papur newydd y Tivyside.
+
+**Reference pin:** -4.659569, 52.0821768 ([map](https://www.openstreetmap.org/?mlat=52.0821768&mlon=-4.659569#map=18/52.0821768/-4.659569)) · OSM geometry bounding-box centre
+
+**Sources:** [fact](https://www.yrhenprintworks.co.uk/) · [coordinates](https://www.openstreetmap.org/way/557071232)
+
+**Review:** Check the pin on the converted chapel building and the suggested difficulty. Suggested difficulty and Welsh wording need local review.
+
+## 46. GRAIN — Cardigan
+
+Difficulty **2** · Point target · Research draft
+
+**English:** GRAIN’s Cardigan venue serves pizza and craft beer by the River Teifi.
+
+**Cymraeg:** GRAIN, Aberteifi. Mae lleoliad GRAIN yn Aberteifi yn gweini pizza a chwrw crefft wrth Afon Teifi.
+
+**Reference pin:** -4.6622607, 52.0813002 ([map](https://www.openstreetmap.org/?mlat=52.0813002&mlon=-4.6622607#map=18/52.0813002/-4.6622607)) · OSM mapped node
+
+**Sources:** [fact](https://grain.wales/venue/cardigan/) · [coordinates](https://www.openstreetmap.org/node/7996962585)
+
+**Review:** OSM maps a venue node; confirm the precise premises and whether its current name is familiar locally. Suggested difficulty and Welsh wording need local review.
+
+## 47. Cardigan Primary School — Cardigan
+
+Difficulty **2** · **Area: scoring boundary required** · Research draft
+
+**English:** Cardigan Primary School is on Napier Street. Its Welsh name is Ysgol Gynradd Aberteifi.
+
+**Cymraeg:** Ysgol Gynradd Aberteifi, Aberteifi. Mae Ysgol Gynradd Aberteifi ar Stryd Napier. Dyma ysgol gynradd y dref.
+
+**Reference pin:** -4.6557325, 52.0841922 ([map](https://www.openstreetmap.org/?mlat=52.0841922&mlon=-4.6557325#map=18/52.0841922/-4.6557325)) · OSM geometry bounding-box centre
+
+**Sources:** [fact](https://ygaberteifi.co.uk/en/contact-us/) · [coordinates](https://www.openstreetmap.org/way/217880147)
+
+**Review:** School grounds are an area target. Agree the accepted footprint or choose a named building before using it in a daily puzzle. Suggested difficulty and Welsh wording need local review.
+
+## 48. Russian cannon outside the Guildhall — Cardigan
+
+Difficulty **3** · Point target · Research draft
+
+**English:** The cannon was placed in front of Cardigan’s Guildhall on 22 May 1871.
+
+**Cymraeg:** Y canon Rwsiaidd y tu allan i Neuadd y Dref, Aberteifi. Gosodwyd y canon o flaen Neuadd y Dref Aberteifi ar 22 Mai 1871.
+
+**Reference pin:** -4.6609342, 52.083706 ([map](https://www.openstreetmap.org/?mlat=52.083706&mlon=-4.6609342#map=18/52.083706/-4.6609342)) · OSM mapped node
+
+**Sources:** [fact](https://cardiganthroughtheages.com/category/guildhall/) · [coordinates](https://www.openstreetmap.org/node/5069425482)
+
+**Review:** Tiny target beside the Guildhall; the 50 m full-score radius makes these two targets overlap. Avoid neighbouring days. Suggested difficulty and Welsh wording need local review.
+
+## 49. Mermaid sculpture — St Dogmaels
+
+Difficulty **3** · Point target · Research draft
+
+**English:** A mermaid sculpture stands by the Teifi at St Dogmaels, where local folklore tells of a fisherman and a mermaid.
+
+**Cymraeg:** Cerflun y fôr-forwyn, Llandudoch. Saif cerflun o fôr-forwyn wrth y Teifi yn Llandudoch, lle mae llên gwerin leol yn adrodd hanes pysgotwr a môr-forwyn.
+
+**Reference pin:** -4.6820344, 52.0889004 ([map](https://www.openstreetmap.org/?mlat=52.0889004&mlon=-4.6820344#map=18/52.0889004/-4.6820344)) · OSM mapped node
+
+**Sources:** [fact](https://www.pembrokeshirecoast.wales/about-the-national-park/culture-and-heritage/land-of-legends/st-dogmaels/) · [coordinates](https://www.openstreetmap.org/node/5779225120)
+
+**Review:** Confirm the sculpture still occupies this mapped spot. Very close to the coast-path marker: current score radii overlap. Suggested difficulty and Welsh wording need local review.
+
+## 50. Pembrokeshire Coast Path start/end marker — St Dogmaels
+
+Difficulty **3** · Point target · Research draft
+
+**English:** St Dogmaels marks the northern end of the Pembrokeshire Coast Path National Trail.
+
+**Cymraeg:** Carreg dechrau/diwedd Llwybr Arfordir Penfro, Llandudoch. Mae Llandudoch yn nodi pen gogleddol Llwybr Arfordir Penfro, un o Lwybrau Cenedlaethol Cymru.
+
+**Reference pin:** -4.6821318, 52.0890404 ([map](https://www.openstreetmap.org/?mlat=52.0890404&mlon=-4.6821318#map=18/52.0890404/-4.6821318)) · OSM mapped node
+
+**Sources:** [fact](https://www.pembrokeshirecoast.wales/about-the-national-park/culture-and-heritage/land-of-legends/st-dogmaels/) · [coordinates](https://www.openstreetmap.org/node/12510930147)
+
+**Review:** Pin is the stone marker itself. Nearby mermaid sculpture shares almost the same scoring area. Suggested difficulty and Welsh wording need local review.
+
+## 51. Kingfisher Hide — Teifi Marshes
+
+Difficulty **3** · Point target · Research draft
+
+**English:** Kingfisher Hide overlooks Kingfisher Pond, also known as the Bass Lagoon, in Teifi Marshes nature reserve.
+
+**Cymraeg:** Cuddfan Glas y Dorlan, Corsydd Teifi. Mae Cuddfan Glas y Dorlan yn edrych dros Bwll Glas y Dorlan, a elwir hefyd yn Lagŵn Bass, yng ngwarchodfa Corsydd Teifi.
+
+**Reference pin:** -4.6472389, 52.0760369 ([map](https://www.openstreetmap.org/?mlat=52.0760369&mlon=-4.6472389#map=18/52.0760369/-4.6472389)) · OSM mapped node
+
+**Sources:** [fact](https://teifibirding.blogspot.com/2022/01/kingfisher-pond-bass-lagoon.html) · [coordinates](https://www.openstreetmap.org/node/3111000863)
+
+**Review:** The hide was rebuilt after a fire. OSM node is an older GPS reference; check the current hide pin and preferred Welsh name locally. Suggested difficulty and Welsh wording need local review.
+
+## 52. Old lifeboat house — Cei Bach
+
+Difficulty **3** · Point target · Research draft
+
+**English:** A new lifeboat house was built here in 1876 at a cost of £450. Cardigan’s station later reopened at Poppit Sands in 1971.
+
+**Cymraeg:** Hen dŷ’r bad achub, Cei Bach. Adeiladwyd tŷ bad achub newydd yma yn 1876 am £450. Ailagorodd gorsaf Aberteifi yn ddiweddarach ar Draeth Poppit yn 1971.
+
+**Reference pin:** -4.7124061, 52.1093005 ([map](https://www.openstreetmap.org/?mlat=52.1093005&mlon=-4.7124061#map=18/52.1093005/-4.7124061)) · OSM geometry bounding-box centre
+
+**Sources:** [fact](https://rnli.org/find-my-nearest/lifeboat-stations/cardigan-lifeboat-station/station-history-cardigan) · [coordinates](https://www.openstreetmap.org/way/564031218)
+
+**Review:** Pin is the surviving old boathouse at Cei Bach, not the present Poppit station. Historic-site identification is corroborated by the BBC St Dogmaels walk. Suggested difficulty and Welsh wording need local review.
+
+## 53. St Cynllo’s Church — Llangoedmor
+
+Difficulty **3** · Point target · Research draft
+
+**English:** St Cynllo’s has an unusual classical spire made of grey Cilgerran stone, with two tiers above a slender obelisk.
+
+**Cymraeg:** Eglwys Sant Cynllo, Llangoedmor. Mae gan Eglwys Sant Cynllo feindwr clasurol anarferol o garreg lwyd Cilgerran, gyda dwy haen uwchben obelisg main.
+
+**Reference pin:** -4.6290894, 52.0812559 ([map](https://www.openstreetmap.org/?mlat=52.0812559&mlon=-4.6290894#map=18/52.0812559/-4.6290894)) · OSM geometry bounding-box centre
+
+**Sources:** [fact](https://heritage.churchinwales.org.uk/church-heritage-record-st-cynllo-llangoedmor-3755) · [coordinates](https://www.openstreetmap.org/way/294490712)
+
+**Review:** Pin is the church building. Suggested difficulty 3; check local familiarity and Welsh wording. Suggested difficulty and Welsh wording need local review.
+
+## 54. St Llawddog’s Church — Cilgerran
+
+Difficulty **3** · Point target · Research draft
+
+**English:** St Llawddog’s retains a medieval west tower. Much of the rest of the present church was rebuilt in 1853–55.
+
+**Cymraeg:** Eglwys Sant Llawddog, Cilgerran. Mae Eglwys Sant Llawddog yn cadw tŵr gorllewinol canoloesol. Ailadeiladwyd llawer o weddill yr eglwys bresennol yn 1853–55.
+
+**Reference pin:** -4.6405309, 52.056449 ([map](https://www.openstreetmap.org/?mlat=52.056449&mlon=-4.6405309#map=18/52.056449/-4.6405309)) · OSM geometry bounding-box centre
+
+**Sources:** [fact](https://heneb.org.uk/church/st-llawddog-cilgerran-pembrokeshire-prn-1178/) · [coordinates](https://www.openstreetmap.org/way/294480442)
+
+**Review:** Pin is the church building, not the separate inscribed stone in its churchyard. Suggested difficulty and Welsh wording need local review.

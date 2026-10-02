@@ -6,6 +6,7 @@ if(date!==next.toISOString().slice(0,10)||ids.length!==3)throw Error(`Usage: nod
 const used=new Set(schedule.days.flatMap(d=>d.places.map(p=>p.id)));
 const places=ids.map((id,i)=>{
  const place=catalogue.places.find(p=>p.id===id);
+ if(place?.discoveryBatch&&place.reviewStatus!=='locally-reviewed')throw Error(`New research target needs local review before scheduling: ${id}`);
  if(!place||place.difficulty!==i+1||place.targetType!=='point'||used.has(id))throw Error(`Invalid, wrong-difficulty, area or already-used target: ${id}`);
  return structuredClone(place);
 });

@@ -4,10 +4,12 @@ import { readFileSync } from 'node:fs';
 import { bounds } from '../src/map-style.js';
 import { wholeAreaView } from '../src/whole-area.js';
 const catalogue = JSON.parse(readFileSync(new URL('../data/location-catalogue.json', import.meta.url), 'utf8'));
-test('owner catalogue has all 33 sourced bilingual candidates with specified difficulties', () => {
-  assert.equal(catalogue.places.length,33);
-  assert.equal(new Set(catalogue.places.map(p=>p.id)).size,33);
-  assert.deepEqual([1,2,3].map(d=>catalogue.places.filter(p=>p.difficulty===d).length),[9,13,11]);
+test('catalogue retains the original 33 candidates and adds sourced bilingual research drafts', () => {
+  assert.equal(catalogue.places.length,54);
+  assert.equal(new Set(catalogue.places.map(p=>p.id)).size,54);
+  assert.deepEqual([1,2,3].map(d=>catalogue.places.filter(p=>p.difficulty===d).length),[16,20,18]);
+  assert.deepEqual([1,2,3].map(d=>catalogue.places.slice(0,33).filter(p=>p.difficulty===d).length),[9,13,11]);
+  assert.deepEqual([1,2,3].map(d=>catalogue.places.filter(p=>p.discoveryBatch&&p.difficulty===d).length),[7,7,7]);
   for(const p of catalogue.places){
     assert.equal(p.enabled,false,'Research drafts must not enter the daily pool');
     for(const lang of ['en','cy'])for(const field of ['name','town','fact'])assert.ok(p[lang][field]);

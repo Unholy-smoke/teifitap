@@ -28,3 +28,11 @@ test('local edits apply only editable fields and cannot alter source data or ena
   assert.deepEqual(applyEdits(catalogue,{[p.id]:{...edit,coord:[-5,53]}}).places[0],p);
   assert.deepEqual(readEdits({getItem:()=>'{broken'}),{});
 });
+
+test('review confirmation survives export fields without enabling targets and invalid statuses are rejected',()=>{
+  const p=catalogue.places.find(p=>p.discoveryBatch),edit={...editableFields(p),reviewStatus:'locally-reviewed'};
+  const changed=applyEdits(catalogue,{[p.id]:edit}).places.find(q=>q.id===p.id);
+  assert.equal(changed.reviewStatus,'locally-reviewed');assert.equal(changed.enabled,false);
+  assert.ok(validateEdit({...edit,reviewStatus:'approved-by-server'}));
+  assert.equal(p.reviewStatus,'needs-local-review');
+});

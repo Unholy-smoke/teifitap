@@ -64,7 +64,7 @@ function render() {
   document.querySelector('#explanation').textContent = t('explanation') + (lang === 'en' ? ` Completed days: ${stats.played}. Current streak: ${stats.streak}. Saved in this browser only.` : ` Dyddiau wedi eu cwblhau: ${stats.played}. Rhediad presennol: ${stats.streak}. Cedwir yn y porwr hwn yn unig.`);
   document.querySelector('#scoring-help').textContent = `${t('scoring')} · ${t('tolerance')}`;
   document.querySelector('#footer-line').textContent = t('footer');
-  document.querySelector('#local-note').textContent = game.mode === 'practice' ? (lang === 'en' ? 'Practice · 33-place catalogue' : 'Ymarfer · catalog o 33 lle') : t('local');
+  document.querySelector('#local-note').textContent = game.mode === 'practice' ? (lang === 'en' ? `Practice · ${catalogue.places.length}-place catalogue` : `Ymarfer · catalog o ${catalogue.places.length} lle`) : t('local');
   if (map) {
     map.getCanvas().setAttribute('aria-label', lang === 'en' ? 'Unlabelled map. Use arrow keys to pan and plus or minus to zoom.' : 'Map heb labeli. Defnyddiwch y bysellau saeth i symud.');
     document.querySelector('.maplibregl-ctrl-zoom-in')?.setAttribute('aria-label', lang === 'en' ? 'Zoom in' : 'Chwyddo');
