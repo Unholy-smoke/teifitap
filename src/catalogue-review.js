@@ -1,0 +1,34 @@
+import { Map, Marker, NavigationControl, setWorkerUrl } from 'maplibre-gl';
+import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
+import 'maplibre-gl/dist/maplibre-gl.css';
+import './catalogue-review.css';
+import catalogue from '../data/location-catalogue.json';
+import catalogueUrl from '../data/location-catalogue.json?url';
+import { bounds, mapStyle } from './map-style.js';
+import { cameraOptions, limitZoomToArea } from './map-camera.js';
+setWorkerUrl(workerUrl);
+document.querySelector('#download').href = catalogueUrl;
+const escape = text => text.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const select = document.querySelector('#place');
+select.innerHTML = catalogue.places.map((p,i) => `<option value="${i}">${i+1}. ${escape(p.en.name)} · ${p.difficulty}</option>`).join('');
+const map = new Map({container:'map', style:mapStyle, ...cameraOptions});
+limitZoomToArea(map);
+map.touchZoomRotate.disableRotation();
+map.addControl(new NavigationControl({showCompass:false}));
+map.on('error', () => {document.querySelector('#map-error').hidden=false;});
+const marker = new Marker({color:'#ac583b'});
+let index = 0;
+function show(value) {
+  index = (value + catalogue.places.length) % catalogue.places.length;
+  select.value = String(index);
+  const p = catalogue.places[index];
+  document.querySelector('#position').textContent = `${index+1} / ${catalogue.places.length}`;
+  document.querySelector('#details').innerHTML = `<p class="badge">Difficulty ${p.difficulty} · ${p.targetType === 'area' ? 'Area reference' : 'Point target'} · Draft</p><h2>${escape(p.en.name)}<small>${escape(p.en.town)}</small></h2><p>${escape(p.en.fact)}</p><div lang="cy"><h3>${escape(p.cy.name)} · ${escape(p.cy.town)}</h3><p>${escape(p.cy.fact)}</p></div><label for="coordinates">Reference pin (longitude, latitude)</label><input id="coordinates" readonly value="${p.coord.join(', ')}"><p class="note">${escape(p.reviewNotes)}</p><p><a href="${escape(p.source)}" target="_blank" rel="noopener">Fact source ↗</a> · <a href="${escape(p.coordinateSource)}" target="_blank" rel="noopener">Coordinate source ↗</a></p>`;
+  marker.setLngLat(p.coord).addTo(map);
+  map.jumpTo({center:p.coord,zoom:p.targetType === 'area' ? 14 : 16});
+}
+select.addEventListener('change', () => show(Number(select.value)));
+document.querySelector('#previous').addEventListener('click', () => show(index-1));
+document.querySelector('#next').addEventListener('click', () => show(index+1));
+document.querySelector('#whole').addEventListener('click', () => map.fitBounds(bounds,{padding:25,duration:0}));
+show(0);

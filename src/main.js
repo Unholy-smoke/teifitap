@@ -4,7 +4,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import './style.css';
 import { places } from './places.js';
 import { bounds, home, mapStyle } from './map-style.js';
-import { cameraOptions } from './map-camera.js';
+import { cameraOptions, limitZoomToArea } from './map-camera.js';
 import { londonDate, displayDate, newGame, validGame, submit, advance, total, emoji, shareText, WEIGHTS } from './game.js';
 maplibregl.setWorkerUrl(workerUrl);
 
@@ -120,6 +120,7 @@ function initialiseMap() {
   try {
     map = new maplibregl.Map({ container: 'map', style: mapStyle, ...cameraOptions, attributionControl: false, keyboard: true });
   } catch { mapFailed = true; showMapMessage(true); return; }
+  limitZoomToArea(map);
   map.touchZoomRotate.disableRotation();
   map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
   map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-left');

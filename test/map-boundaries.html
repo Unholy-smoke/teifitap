@@ -2,16 +2,24 @@
 import {Map,setWorkerUrl} from 'maplibre-gl';
 import worker from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import {cameraOptions} from '../src/map-camera.js';
+import {cameraOptions,limitZoomToArea} from '../src/map-camera.js';
+import {wholeAreaView} from '../src/whole-area.js';
 import {bounds} from '../src/map-style.js';
 import {places} from '../src/places.js';
 setWorkerUrl(worker);
 const map = new Map({container:'map',style:{version:8,sources:{},layers:[{id:'paper',type:'background',paint:{'background-color':'#eee8d9'}}]},...cameraOptions});
+limitZoomToArea(map);
 map.on('load',()=>{
   const failures=[];let count=0;
   const corners=[bounds[0],bounds[1],[bounds[0][0],bounds[1][1]],[bounds[1][0],bounds[0][1]]];
   for(const [w,h] of [[390,560],[320,420],[1200,720]]){
     const element=document.querySelector('#map');element.style.width=`${w}px`;element.style.height=`${h}px`;map.resize();
+    const view=wholeAreaView(w,h);
+    map.jumpTo({...view,zoom:-10});
+    if(Math.abs(map.getZoom()-view.zoom)>1e-7)failures.push(`Zoom-out floor failed at ${w}x${h}`);
+    for(const corner of corners){const point=map.project(corner);if(point.x<24.9||point.x>w-24.9||point.y<24.9||point.y>h-24.9)failures.push(`Whole area cropped at ${w}x${h}`);}
+    map.jumpTo({zoom:25});
+    if(map.getZoom()>18.000001)failures.push('Zoom-in ceiling failed');
     for(const zoom of [11,12.65,16,18])for(const target of [...places.map(p=>p.coord),...corners]){
       map.jumpTo({center:target,zoom});
       const actual=map.getCenter();const point=map.project(target);const box=element.getBoundingClientRect();
@@ -21,7 +29,7 @@ map.on('load',()=>{
     map.jumpTo({center:[-5,53],zoom:12});
     if(Math.abs(map.getCenter().lng-bounds[0][0])>1e-7||Math.abs(map.getCenter().lat-bounds[1][1])>1e-7)failures.push('Outside point not clamped');
   }
-  document.querySelector('#result').textContent=failures.length?`FAIL\n${failures.join('\n')}`:`PASS: ${count} target/corner/zoom/viewport combinations centred correctly; outside centres constrained. Includes Cilgerran Castle and the Cliff Hotel.`;
+  document.querySelector('#result').textContent=failures.length?`FAIL\n${failures.join('\n')}`:`PASS: ${count} target/corner/zoom/viewport combinations centred correctly; outside centres constrained; responsive whole-area zoom floor and zoom-in ceiling respected.`;
 });
 </script></body></html>
 

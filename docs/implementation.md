@@ -1,6 +1,14 @@
 # TeifiTap minimum playable version
 
-Implemented 1 October 2026. Static Vite application, vanilla JavaScript and MapLibre GL JS. Dependencies locked in package-lock.json. Local development server: port 5173. No public deployment.
+Initially implemented 1 October 2026. Static Vite application, vanilla JavaScript and MapLibre GL JS. Dependencies locked in package-lock.json. Local development server: port 5173. Public testing on GitHub Pages.
+
+## 2 October: expanded catalogue and zoom limits
+
+The 33 owner-supplied candidates are stored in `data/location-catalogue.json`, with difficulties 1–3, bilingual draft facts, source links, reference coordinates, target types and review notes. They remain separate from the five active starter targets until pins and area scoring are reviewed. `scripts/render-catalogue.js` generates the Markdown companion. The deployed `/catalogue.html` page steps through each pin and fact without changing game progress; it contains answers and is not linked from the game.
+
+The owner confirmed Teifi Boating Club at difficulty 2, Banc-y-Warren as the summit, and Pont y Cleifion as the A487 bypass bridge (mapped as Priory Bridge). All catalogue reference points, including Penparc, fit the existing bounds. Villages, estate, club grounds and quarry need accepted polygons: their single reference points must not become precise scoring targets.
+
+`limitZoomToArea` sets the minimum zoom from the map canvas dimensions and Mercator bounds, with 25 px padding. It recalculates on MapLibre resize and enforces both zoom limits inside the custom centre constraint. Browser regression verifies the whole-area view, 108 edge/target combinations and the zoom-in ceiling. Mobile touch regression continues to require sustained pan/pinch events and no gesture-triggered resizes.
 
 ## Map strategy
 
