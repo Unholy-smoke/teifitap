@@ -1,0 +1,587 @@
+{
+  "schemaVersion": 1,
+  "note": "Published daily ledger. Keep past entries immutable. Add future dates using unused IDs. No automatic recycling; after the final date the latest dated puzzle remains available.",
+  "days": [
+    {
+      "date": "2026-10-02",
+      "places": [
+        {
+          "id": "cardigan-rugby-club",
+          "difficulty": 1,
+          "enabled": false,
+          "reviewStatus": "needs-local-review",
+          "targetType": "point",
+          "coord": [
+            -4.6544019,
+            52.0884574
+          ],
+          "coordinateMethod": "OSM geometry bounding-box centre",
+          "en": {
+            "name": "Cardigan Rugby Club",
+            "town": "Cardigan",
+            "fact": "Cardigan RFC was founded in 1876. Its clubhouse and home ground are on Gwbert Road."
+          },
+          "cy": {
+            "name": "Clwb Rygbi Aberteifi",
+            "town": "Aberteifi",
+            "fact": "Sefydlwyd Clwb Rygbi Aberteifi yn 1876. Mae’r clwb a’i faes cartref ar Heol Gwbert."
+          },
+          "source": "https://en.wikipedia.org/wiki/Cardigan_RFC",
+          "coordinateSource": "https://www.openstreetmap.org/way/524390707",
+          "reviewNotes": "Pin is the clubhouse. Decide whether guesses on the adjacent home pitch should also earn full marks.",
+          "geometry": null
+        },
+        {
+          "id": "ferry-inn",
+          "difficulty": 2,
+          "enabled": false,
+          "reviewStatus": "needs-local-review",
+          "targetType": "point",
+          "coord": [
+            -4.6817785,
+            52.087634
+          ],
+          "coordinateMethod": "OSM node",
+          "en": {
+            "name": "The Ferry Inn",
+            "town": "St Dogmaels",
+            "fact": "The riverside inn overlooks the tidal Teifi from terraces on Poppit Road."
+          },
+          "cy": {
+            "name": "Y Ferry Inn",
+            "town": "Llandudoch",
+            "fact": "Mae’r dafarn ar lan yr afon yn edrych dros ran lanwol Afon Teifi o derasau ar Heol Poppit."
+          },
+          "source": "https://www.theferryinn.co.uk/",
+          "coordinateSource": "https://www.openstreetmap.org/node/10093634158",
+          "reviewNotes": "OSM pub point is used; FSA geocoding is about 75 m away. Check the exact pub centre.",
+          "geometry": null
+        },
+        {
+          "id": "mantle-brewery",
+          "difficulty": 3,
+          "enabled": false,
+          "reviewStatus": "needs-local-review",
+          "targetType": "point",
+          "coord": [
+            -4.6577049,
+            52.0791744
+          ],
+          "coordinateMethod": "OSM geometry bounding-box centre",
+          "en": {
+            "name": "Mantle Brewery",
+            "town": "Cardigan",
+            "fact": "This family-run microbrewery makes Welsh real ales at Pentood Industrial Estate, including Cwrw Teifi."
+          },
+          "cy": {
+            "name": "Bragdy Mantle",
+            "town": "Aberteifi",
+            "fact": "Mae’r microfragdy teuluol hwn yn cynhyrchu cwrw go iawn Cymreig ar Ystad Ddiwydiannol Pentood, gan gynnwys Cwrw Teifi."
+          },
+          "source": "https://mantlebrewery.com/",
+          "coordinateSource": "https://www.openstreetmap.org/way/605888539",
+          "reviewNotes": "Check the pin and Welsh wording locally before enabling.",
+          "geometry": null
+        }
+      ]
+    },
+    {
+      "date": "2026-10-03",
+      "places": [
+        {
+          "id": "black-lion",
+          "difficulty": 1,
+          "enabled": false,
+          "reviewStatus": "needs-local-review",
+          "targetType": "point",
+          "coord": [
+            -4.6611157,
+            52.0827157
+          ],
+          "coordinateMethod": "OSM geometry bounding-box centre",
+          "en": {
+            "name": "The Black Lion",
+            "town": "Cardigan",
+            "fact": "Cardigan’s town council met at the Black Lion in the eighteenth century; the inn also hosted auctions and public gatherings."
+          },
+          "cy": {
+            "name": "Y Black Lion",
+            "town": "Aberteifi",
+            "fact": "Cyfarfu cyngor tref Aberteifi yn y Black Lion yn y ddeunawfed ganrif; cynhaliwyd arwerthiannau a chyfarfodydd cyhoeddus yno hefyd."
+          },
+          "source": "https://historypoints.org/index.php?page=the-black-lion-hotel-cardigan",
+          "coordinateSource": "https://www.openstreetmap.org/way/525409129",
+          "reviewNotes": "Check the pin and Welsh wording locally before enabling.",
+          "geometry": null
+        },
+        {
+          "id": "abduls-tandoori-spice",
+          "difficulty": 2,
+          "enabled": false,
+          "reviewStatus": "needs-local-review",
+          "targetType": "point",
+          "coord": [
+            -4.6632259,
+            52.0817562
+          ],
+          "coordinateMethod": "OSM geometry bounding-box centre",
+          "en": {
+            "name": "Abdul’s Tandoori Spice",
+            "town": "Cardigan",
+            "fact": "This Indian and tandoori restaurant occupies 2 Royal Oak on Quay Street, beside Cardigan’s old waterfront."
+          },
+          "cy": {
+            "name": "Abdul’s Tandoori Spice",
+            "town": "Aberteifi",
+            "fact": "Mae’r bwyty Indiaidd a thandoori hwn yn 2 Royal Oak ar Heol y Cei, ger hen lan y dŵr Aberteifi."
+          },
+          "source": "https://api.ratings.food.gov.uk/Establishments/863594",
+          "coordinateSource": "https://www.openstreetmap.org/way/529053897",
+          "reviewNotes": "Check the pin and Welsh wording locally before enabling.",
+          "geometry": null
+        },
+        {
+          "id": "blaenwaun-baptist-chapel",
+          "difficulty": 3,
+          "enabled": false,
+          "reviewStatus": "needs-local-review",
+          "targetType": "point",
+          "coord": [
+            -4.6841337,
+            52.0712064
+          ],
+          "coordinateMethod": "OSM geometry bounding-box centre",
+          "en": {
+            "name": "Blaenwaun Baptist Chapel",
+            "town": "St Dogmaels",
+            "fact": "The first chapel here was built in 1745 with a thatched roof. The congregation also had a separate open-air baptismal pool downhill."
+          },
+          "cy": {
+            "name": "Capel Bedyddwyr Blaenwaun",
+            "town": "Llandudoch",
+            "fact": "Adeiladwyd y capel cyntaf yma yn 1745 gyda tho gwellt. Roedd gan y gynulleidfa bwll bedydd awyr agored ar wahân i lawr y bryn hefyd."
+          },
+          "source": "https://coflein.gov.uk/en/sites/11695",
+          "coordinateSource": "https://www.openstreetmap.org/way/857269657",
+          "reviewNotes": "Target the chapel itself. Its listed baptismal pool is a separate site roughly 300 m north-west.",
+          "geometry": null
+        }
+      ]
+    },
+    {
+      "date": "2026-10-04",
+      "places": [
+        {
+          "id": "our-lady-of-the-taper",
+          "difficulty": 1,
+          "enabled": false,
+          "reviewStatus": "needs-local-review",
+          "targetType": "point",
+          "coord": [
+            -4.6527177,
+            52.087322
+          ],
+          "coordinateMethod": "OSM geometry bounding-box centre",
+          "en": {
+            "name": "Our Lady of the Taper Catholic Church",
+            "town": "Cardigan",
+            "fact": "The church became the Welsh National Shrine of Our Lady in 1986. Its statue of Mary holds a burning taper."
+          },
+          "cy": {
+            "name": "Eglwys Gatholig Mair o Aberteifi",
+            "town": "Aberteifi",
+            "fact": "Daeth yr eglwys yn Gysegr Cenedlaethol Cymru i Fair yn 1986. Mae cerflun Mair yn dal cannwyll yn llosgi."
+          },
+          "source": "https://ourladyofthetaper.org.uk/history/",
+          "coordinateSource": "https://www.openstreetmap.org/way/319112377",
+          "reviewNotes": "Check the pin and Welsh wording locally before enabling.",
+          "geometry": null
+        },
+        {
+          "id": "pont-y-cleifion",
+          "difficulty": 2,
+          "enabled": false,
+          "reviewStatus": "needs-local-review",
+          "targetType": "point",
+          "coord": [
+            -4.6543561,
+            52.0817128
+          ],
+          "coordinateMethod": "OSM geometry bounding-box centre",
+          "en": {
+            "name": "Pont y Cleifion bridge",
+            "town": "Cardigan",
+            "fact": "The A487 bypass crosses the Teifi east of the town centre on the bridge mapped as Priory Bridge / Pont y Priordy."
+          },
+          "cy": {
+            "name": "Pont y Cleifion",
+            "town": "Aberteifi",
+            "fact": "Mae ffordd osgoi’r A487 yn croesi Afon Teifi i’r dwyrain o ganol y dref ar Bont y Priordy."
+          },
+          "source": "https://www.openstreetmap.org/way/1090804276",
+          "coordinateSource": "https://www.openstreetmap.org/way/1090804276",
+          "reviewNotes": "Owner confirmed the A487 bypass bridge. Pin is the bridge structure centre, not the nearby street named Pont-y-Cleifion.",
+          "geometry": null
+        },
+        {
+          "id": "banc-y-warren-summit",
+          "difficulty": 3,
+          "enabled": false,
+          "reviewStatus": "needs-local-review",
+          "targetType": "point",
+          "coord": [
+            -4.6231554,
+            52.0966668
+          ],
+          "coordinateMethod": "OSM node",
+          "en": {
+            "name": "Banc-y-Warren summit",
+            "town": "Penparc",
+            "fact": "The summit is 146 metres high. The hill is traditionally associated with the Battle of Crug Mawr in 1136, although the battle’s precise location is uncertain."
+          },
+          "cy": {
+            "name": "Copa Banc-y-Warren",
+            "town": "Penparc",
+            "fact": "Mae’r copa 146 metr o uchder. Cysylltir y bryn yn draddodiadol â Brwydr Crug Mawr yn 1136, ond mae union leoliad y frwydr yn ansicr."
+          },
+          "source": "https://coflein.gov.uk/en/sites/402323",
+          "coordinateSource": "https://www.openstreetmap.org/node/3611692071",
+          "reviewNotes": "Owner confirmed the hill itself. Target the summit/trig point, not the quarry or wider Banc-y-Warren area. Elevation from the OSM summit record.",
+          "geometry": null
+        }
+      ]
+    },
+    {
+      "date": "2026-10-05",
+      "places": [
+        {
+          "id": "angel-hotel",
+          "difficulty": 1,
+          "enabled": false,
+          "reviewStatus": "needs-local-review",
+          "targetType": "point",
+          "coord": [
+            -4.6590961,
+            52.0822515
+          ],
+          "coordinateMethod": "OSM geometry bounding-box centre",
+          "en": {
+            "name": "The Angel Hotel",
+            "town": "Cardigan",
+            "fact": "The Angel was hosting auctions by 1806 and appears on John Wood’s 1834 map of Cardigan."
+          },
+          "cy": {
+            "name": "Gwesty’r Angel",
+            "town": "Aberteifi",
+            "fact": "Roedd yr Angel yn cynnal arwerthiannau erbyn 1806 ac mae ar fap John Wood o Aberteifi yn 1834."
+          },
+          "source": "https://historypoints.org/index.php?page=angel-hotel-cardigan",
+          "coordinateSource": "https://www.openstreetmap.org/way/550723882",
+          "reviewNotes": "Check the pin and Welsh wording locally before enabling.",
+          "geometry": null
+        },
+        {
+          "id": "pendre-fish-and-chips",
+          "difficulty": 2,
+          "enabled": false,
+          "reviewStatus": "needs-local-review",
+          "targetType": "point",
+          "coord": [
+            -4.660087,
+            52.0849929
+          ],
+          "coordinateMethod": "OSM geometry bounding-box centre",
+          "en": {
+            "name": "Pendre Fish and Chips",
+            "town": "Cardigan",
+            "fact": "Pendre Café is a fish-and-chip café and takeaway on Pendre, north of the High Street."
+          },
+          "cy": {
+            "name": "Pendre Fish and Chips",
+            "town": "Aberteifi",
+            "fact": "Mae Caffi Pendre yn gaffi a siop pysgod a sglodion ar Bendre, i’r gogledd o’r Stryd Fawr."
+          },
+          "source": "https://www.listwales.co.uk/food_drink/details.php?id=567",
+          "coordinateSource": "https://www.openstreetmap.org/way/523334234",
+          "reviewNotes": "Pendre Café, 16 Pendre is the researched match. OSM building centre is about 80 m north-east of the FSA/listing pin. Confirm exact premises; council tourism PDF also inconsistently says 1 Pendre.",
+          "geometry": null
+        },
+        {
+          "id": "cardiff-arms",
+          "difficulty": 3,
+          "enabled": false,
+          "reviewStatus": "needs-local-review",
+          "targetType": "point",
+          "coord": [
+            -4.6349257,
+            52.0557818
+          ],
+          "coordinateMethod": "OSM geometry bounding-box centre",
+          "en": {
+            "name": "Cardiff Arms",
+            "town": "Cilgerran",
+            "fact": "The nineteenth-century inn is built from Cilgerran stone and is Grade II listed as one of the village’s least altered buildings."
+          },
+          "cy": {
+            "name": "Cardiff Arms",
+            "town": "Cilgerran",
+            "fact": "Adeiladwyd y dafarn o gerrig Cilgerran yn y bedwaredd ganrif ar bymtheg. Mae’n adeilad rhestredig Gradd II ac yn un o adeiladau’r pentref sydd wedi newid leiaf."
+          },
+          "source": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=14499&lang=en",
+          "coordinateSource": "https://www.openstreetmap.org/way/608681304",
+          "reviewNotes": "Check the pin and Welsh wording locally before enabling.",
+          "geometry": null
+        }
+      ]
+    },
+    {
+      "date": "2026-10-06",
+      "places": [
+        {
+          "id": "tesco-superstore",
+          "difficulty": 1,
+          "enabled": false,
+          "reviewStatus": "needs-local-review",
+          "targetType": "point",
+          "coord": [
+            -4.64663,
+            52.0887424
+          ],
+          "coordinateMethod": "OSM geometry bounding-box centre",
+          "en": {
+            "name": "Tesco Superstore",
+            "town": "Cardigan",
+            "fact": "The superstore stands on Aberystwyth Road, on the north-eastern side of town; the petrol station is a separate building."
+          },
+          "cy": {
+            "name": "Tesco Superstore",
+            "town": "Aberteifi",
+            "fact": "Saif yr archfarchnad ar Heol Aberystwyth, yng ngogledd-ddwyrain y dref; mae’r orsaf betrol mewn adeilad ar wahân."
+          },
+          "source": "https://www.tesco.com/store-locator/cardigan/aberystwyth-road",
+          "coordinateSource": "https://www.openstreetmap.org/way/217881199",
+          "reviewNotes": "Pin uses the supermarket building, not the petrol station or the less precise FSA address point.",
+          "geometry": null
+        },
+        {
+          "id": "albion-aberteifi",
+          "difficulty": 2,
+          "enabled": false,
+          "reviewStatus": "needs-local-review",
+          "targetType": "point",
+          "coord": [
+            -4.6607747,
+            52.080212
+          ],
+          "coordinateMethod": "Documentary reference point; approximate",
+          "en": {
+            "name": "Albion Aberteifi",
+            "town": "Cardigan",
+            "fact": "The old wharf warehouses preserve nineteenth-century pencil sketches of tall ships and calculations for ropes and sails."
+          },
+          "cy": {
+            "name": "Albion Aberteifi",
+            "town": "Aberteifi",
+            "fact": "Mae hen warysau’r cei yn cadw brasluniau pensil o longau tal a chyfrifiadau ar gyfer rhaffau a hwyliau o’r bedwaredd ganrif ar bymtheg."
+          },
+          "source": "https://www.albionaberteifi.co.uk/",
+          "coordinateSource": "https://api.ratings.food.gov.uk/Establishments/1520346",
+          "reviewNotes": "FSA premises point for Bridge Warehouse, Castle Street. Confirm the precise hotel building centre; OSM has not supplied a named hotel feature here.",
+          "geometry": null
+        },
+        {
+          "id": "tivy-tyres",
+          "difficulty": 3,
+          "enabled": false,
+          "reviewStatus": "needs-local-review",
+          "targetType": "point",
+          "coord": [
+            -4.6562868,
+            52.0810681
+          ],
+          "coordinateMethod": "OSM geometry bounding-box centre",
+          "en": {
+            "name": "Tivy Tyres",
+            "town": "Cardigan",
+            "fact": "This tyre-fitting business is in the old station yard on Station Road, beside the former Cardigan railway station site."
+          },
+          "cy": {
+            "name": "Tivy Tyres",
+            "town": "Aberteifi",
+            "fact": "Mae’r busnes teiars hwn yn hen iard yr orsaf ar Heol yr Orsaf, ger hen safle gorsaf reilffordd Aberteifi."
+          },
+          "source": "https://www.yell.com/biz/tivy-tyres-cardigan-8961642/",
+          "coordinateSource": "https://www.openstreetmap.org/way/607382060",
+          "reviewNotes": "Business spelling is Tivy Tyres. OSM records an outdated address on its Facebook page; use the mapped Station Yard building, not an old Pentood unit.",
+          "geometry": null
+        }
+      ]
+    },
+    {
+      "date": "2026-10-07",
+      "places": [
+        {
+          "id": "spar",
+          "difficulty": 1,
+          "enabled": false,
+          "reviewStatus": "needs-local-review",
+          "targetType": "point",
+          "coord": [
+            -4.6558021,
+            52.0863925
+          ],
+          "coordinateMethod": "OSM geometry bounding-box centre",
+          "en": {
+            "name": "Spar",
+            "town": "Cardigan",
+            "fact": "This North Road shop is also known as North End Stores."
+          },
+          "cy": {
+            "name": "Spar",
+            "town": "Aberteifi",
+            "fact": "Gelwir y siop hon ar Heol y Gogledd hefyd yn North End Stores."
+          },
+          "source": "https://www.spar.co.uk/store-locator/afb16714-spar-cardigan",
+          "coordinateSource": "https://www.openstreetmap.org/way/217882222",
+          "reviewNotes": "Check the pin and Welsh wording locally before enabling.",
+          "geometry": null
+        },
+        {
+          "id": "teifi-otter-statue",
+          "difficulty": 2,
+          "enabled": false,
+          "reviewStatus": "needs-local-review",
+          "targetType": "point",
+          "coord": [
+            -4.660967,
+            52.0810007
+          ],
+          "coordinateMethod": "OSM node",
+          "en": {
+            "name": "Teifi Otter Statue",
+            "town": "Cardigan",
+            "fact": "Geoffrey Powell’s bronze otter was presented by David Bellamy in 1988 to mark the Dyfed Wildlife Trust’s golden jubilee."
+          },
+          "cy": {
+            "name": "Dwrgi’r Teifi",
+            "town": "Aberteifi",
+            "fact": "Cyflwynwyd dwrgi efydd Geoffrey Powell gan David Bellamy yn 1988 i nodi jiwbilî aur Ymddiriedolaeth Bywyd Gwyllt Dyfed."
+          },
+          "source": "https://www.vanderkrogt.net/statues/object.php?record=gbwa059",
+          "coordinateSource": "https://www.openstreetmap.org/node/4807246721",
+          "reviewNotes": "Bronze otter by the castle/bridge, not the large willow otter at the Wildlife Centre. Fact is supported by the photographed plaque.",
+          "geometry": null
+        },
+        {
+          "id": "cardigan-railway-station",
+          "difficulty": 3,
+          "enabled": false,
+          "reviewStatus": "needs-local-review",
+          "targetType": "point",
+          "coord": [
+            -4.6567,
+            52.0808
+          ],
+          "coordinateMethod": "Documentary reference point; approximate",
+          "en": {
+            "name": "Cardigan Railway Station (former site)",
+            "town": "Cardigan",
+            "fact": "The station opened in 1886 as the terminus of the Whitland and Cardigan Railway. Passenger services ended in 1962."
+          },
+          "cy": {
+            "name": "Gorsaf Reilffordd Aberteifi (hen safle)",
+            "town": "Aberteifi",
+            "fact": "Agorwyd yr orsaf yn 1886 fel terfynfa Rheilffordd Hendy-gwyn ar Daf ac Aberteifi. Daeth gwasanaethau teithwyr i ben yn 1962."
+          },
+          "source": "https://coflein.gov.uk/en/sites/41370",
+          "coordinateSource": "https://en.wikipedia.org/wiki/Cardigan_railway_station",
+          "reviewNotes": "Historical reference point, cross-checked with Coflein grid reference SN1805045818. Confirm the former passenger station footprint, rather than the surviving goods shed or Tivy Tyres next door.",
+          "geometry": null
+        }
+      ]
+    },
+    {
+      "date": "2026-10-08",
+      "places": [
+        {
+          "id": "welsh-wildlife-centre",
+          "difficulty": 1,
+          "enabled": false,
+          "reviewStatus": "needs-local-review",
+          "targetType": "point",
+          "coord": [
+            -4.6451144,
+            52.0743274
+          ],
+          "coordinateMethod": "OSM geometry bounding-box centre",
+          "en": {
+            "name": "Wildlife Centre",
+            "town": "Cilgerran",
+            "fact": "The centre sits in Teifi Marshes nature reserve, a wetland home to kingfishers, wading birds and otters."
+          },
+          "cy": {
+            "name": "Canolfan Bywyd Gwyllt Cymru",
+            "town": "Cilgerran",
+            "fact": "Mae’r ganolfan yng ngwarchodfa Corsydd Teifi, cartref gwlyptir i las y dorlan, adar hirgoes a dyfrgwn."
+          },
+          "source": "https://www.welshwildlife.org/visit/welsh-wildlife-centre-teifi-marshes",
+          "coordinateSource": "https://www.openstreetmap.org/way/306248630",
+          "reviewNotes": "Check the pin and Welsh wording locally before enabling.",
+          "geometry": null
+        },
+        {
+          "id": "grosvenor",
+          "difficulty": 2,
+          "enabled": false,
+          "reviewStatus": "needs-local-review",
+          "targetType": "point",
+          "coord": [
+            -4.6616429,
+            52.0813428
+          ],
+          "coordinateMethod": "OSM geometry bounding-box centre",
+          "en": {
+            "name": "The Grosvenor",
+            "town": "Cardigan",
+            "fact": "The Grosvenor stands on Bridge Street opposite Cardigan Castle, with its terrace looking over the Teifi."
+          },
+          "cy": {
+            "name": "Y Grosvenor",
+            "town": "Aberteifi",
+            "fact": "Saif y Grosvenor ar Heol y Bont gyferbyn â Chastell Aberteifi, gyda’i deras yn edrych dros Afon Teifi."
+          },
+          "source": "https://grosvenorcardigan.co.uk/drinks/",
+          "coordinateSource": "https://www.openstreetmap.org/way/549051175",
+          "reviewNotes": "Check the pin and Welsh wording locally before enabling.",
+          "geometry": null
+        },
+        {
+          "id": "brondesbury-lodge",
+          "difficulty": 3,
+          "enabled": false,
+          "reviewStatus": "needs-local-review",
+          "targetType": "point",
+          "coord": [
+            -4.648015,
+            52.0905656
+          ],
+          "coordinateMethod": "OSM geometry bounding-box centre",
+          "en": {
+            "name": "Brondesbury Lodge",
+            "town": "Cardigan",
+            "fact": "Brondesbury Lodge is a purpose-built nursing and residential care home on Heol Derw."
+          },
+          "cy": {
+            "name": "Brondesbury Lodge",
+            "town": "Aberteifi",
+            "fact": "Mae Brondesbury Lodge yn gartref nyrsio a gofal preswyl pwrpasol ar Heol Derw."
+          },
+          "source": "https://www.brondesburylodge.co.uk/",
+          "coordinateSource": "https://www.openstreetmap.org/way/553050843",
+          "reviewNotes": "Check the pin and Welsh wording locally before enabling.",
+          "geometry": null
+        }
+      ]
+    }
+  ]
+}

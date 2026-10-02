@@ -2,23 +2,26 @@ import * as maplibregl from 'maplibre-gl';
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import './style.css';
-import { places as dailyPlaces } from './places.js';
+import { places as starterPlaces } from './places.js';
+import schedule from '../data/daily-schedule.json';
+import { DAILY_KEY, readHistory, restoreDaily, scheduledGame, scheduledDay, historyStats } from './daily.js';
+const dailyPlaces = schedule.days.flatMap(day=>day.places);
 import catalogue from '../data/location-catalogue.json';
 import { applyEdits, readEdits } from './catalogue-store.js';
 import { bounds, home, mapStyle } from './map-style.js';
 import { cameraOptions, limitZoomToArea } from './map-camera.js';
-import { londonDate, displayDate, newGame, validGame, submit, advance, total, emoji, shareText, WEIGHTS } from './game.js';
+import { londonDate, displayDate, newGame, submit, advance, total, emoji, shareText, WEIGHTS } from './game.js';
 maplibregl.setWorkerUrl(workerUrl);
 
-const KEY = 'teifitap.daily.v1';
+const KEY = DAILY_KEY;
 const copy = {
-  en: { strap: 'Know your corner of the world.', daily: 'The daily wander', practice: 'A practice wander', round: 'Round', of: 'of', find: 'Can you find…', easy: 'A familiar place', medium: 'A closer look', hard: 'The final stretch', help: 'Move the map. Trust your memory.', instructions: 'Drag the map beneath the pin. Zoom in, then confirm your spot.', confirm: 'Confirm my spot', loading: 'Loading the map…', reset: 'Whole area', score: 'Points', hint: 'Roads, river, coastline. The rest is up to you.', next: 'Next place', results: 'See my results', away: 'from the spot', right: 'The right spot', yours: 'Your guess', fact: 'A little local knowledge', source: 'Read more', finished: 'Your Teifi, explored.', done: 'Three places. One lovely corner of Wales.', share: 'Share my score', copy: 'Copy result', copied: 'Result copied.', manual: 'Select and copy your result below.', practiceButton: 'Try a practice game', dailyButton: 'Back to daily', practiceNote: 'Practice · your daily score is safe', footer: 'Three places · one river · every day', tolerance: 'Within 50 m earns full marks. Aim for the centre of the place.', scoring: '1× · 2× · 3× — up to 600 points', retry: 'Retry map', mapError: 'The map could not load. Check your connection, then retry.', storage: 'Progress cannot be saved in this browser. Keep this tab open to finish.', fresh: 'A new daily puzzle is ready.', freshButton: 'Play today’s puzzle', close: 'Close', about: 'How to play', welcome: 'Follow the river. Find your bearings.', explanation: 'Three named places around Cardigan, St Dogmaels, Gwbert and Cilgerran. No labels and no timer. Centre the pin on each place and confirm. Each round is worth up to 100 points, multiplied by 1, 2 and 3. Your daily progress is saved on this device.', local: 'Local playtest · five-place pool', north: 'North', distance: 'Distance', weighted: 'Weighted points' },
-  cy: { strap: 'Pa mor dda ydych chi’n adnabod eich bro?', daily: 'Her y dydd', practice: 'Gêm ymarfer', round: 'Rownd', of: 'o', find: 'Allwch chi ddod o hyd i…', easy: 'Lle cyfarwydd', medium: 'Golwg agosach', hard: 'Y rownd olaf', help: 'Symudwch y map. Dilynwch eich cof.', instructions: 'Llusgwch y map o dan y pin. Chwyddwch, yna cadarnhewch eich man.', confirm: 'Cadarnhau fy man', loading: 'Llwytho’r map…', reset: 'Yr ardal gyfan', score: 'Pwyntiau', hint: 'Ffyrdd, afon, arfordir. Chi sydd â’r gweddill.', next: 'Y lle nesaf', results: 'Gweld fy nghanlyniadau', away: 'o’r man', right: 'Y man cywir', yours: 'Eich dyfaliad', fact: 'Tipyn o wybodaeth leol', source: 'Darllen mwy', finished: 'Eich taith ar hyd y Teifi.', done: 'Tri lle. Un gornel hyfryd o Gymru.', share: 'Rhannu fy sgôr', copy: 'Copïo’r canlyniad', copied: 'Wedi copïo’r canlyniad.', manual: 'Dewiswch a chopïwch eich canlyniad isod.', practiceButton: 'Rhoi cynnig ar gêm ymarfer', dailyButton: 'Yn ôl i her y dydd', practiceNote: 'Ymarfer · mae eich sgôr ddyddiol yn ddiogel', footer: 'Tri lle · un afon · bob dydd', tolerance: 'O fewn 50 m am y pwyntiau llawn. Anelwch at ganol y lle.', scoring: '1× · 2× · 3× — hyd at 600 pwynt', retry: 'Ail-lwytho’r map', mapError: 'Methu llwytho’r map. Gwiriwch eich cysylltiad a rhowch gynnig arall.', storage: 'Ni ellir cadw cynnydd yn y porwr hwn. Cadwch y tab ar agor.', fresh: 'Mae her ddyddiol newydd yn barod.', freshButton: 'Chwarae her heddiw', close: 'Cau', about: 'Sut i chwarae', welcome: 'Dilynwch yr afon. Dewch o hyd i’ch ffordd.', explanation: 'Tri lle o amgylch Aberteifi, Llandudoch, Gwbert a Chilgerran. Dim labeli a dim amserydd. Rhowch y pin dros bob lle a chadarnhewch. Hyd at 100 pwynt ym mhob rownd, wedi eu lluosi ag 1, 2 a 3. Cedwir eich cynnydd ar y ddyfais hon.', local: 'Prawf lleol · cronfa o bum lle', north: 'Gogledd', distance: 'Pellter', weighted: 'Pwyntiau wedi eu lluosi' },
+  en: { strap: 'Know your corner of the world.', daily: 'The daily wander', practice: 'A practice wander', round: 'Round', of: 'of', find: 'Can you find…', easy: 'A familiar place', medium: 'A closer look', hard: 'The final stretch', help: 'Move the map. Trust your memory.', instructions: 'Drag the map beneath the pin. Zoom in, then confirm your spot.', confirm: 'Confirm my spot', loading: 'Loading the map…', reset: 'Whole area', score: 'Points', hint: 'Roads, river, coastline. The rest is up to you.', next: 'Next place', results: 'See my results', away: 'from the spot', right: 'The right spot', yours: 'Your guess', fact: 'A little local knowledge', source: 'Read more', finished: 'Your Teifi, explored.', done: 'Three places. One lovely corner of Wales.', share: 'Share my score', copy: 'Copy result', copied: 'Result copied.', manual: 'Select and copy your result below.', practiceButton: 'Try a practice game', dailyButton: 'Back to daily', practiceNote: 'Practice · your daily score is safe', footer: 'Three places · one river · every day', tolerance: 'Within 50 m earns full marks. Aim for the centre of the place.', scoring: '1× · 2× · 3× — up to 600 points', retry: 'Retry map', mapError: 'The map could not load. Check your connection, then retry.', storage: 'Progress cannot be saved in this browser. Keep this tab open to finish.', fresh: 'A new daily puzzle is ready.', freshButton: 'Play today’s puzzle', close: 'Close', about: 'How to play', welcome: 'Follow the river. Find your bearings.', explanation: 'Three named places around Cardigan, St Dogmaels, Gwbert and Cilgerran. No labels and no timer. Centre the pin on each place and confirm. Each round is worth up to 100 points, multiplied by 1, 2 and 3. Your daily progress is saved on this device.', local: 'Family daily · no repeated places', north: 'North', distance: 'Distance', weighted: 'Weighted points' },
+  cy: { strap: 'Pa mor dda ydych chi’n adnabod eich bro?', daily: 'Her y dydd', practice: 'Gêm ymarfer', round: 'Rownd', of: 'o', find: 'Allwch chi ddod o hyd i…', easy: 'Lle cyfarwydd', medium: 'Golwg agosach', hard: 'Y rownd olaf', help: 'Symudwch y map. Dilynwch eich cof.', instructions: 'Llusgwch y map o dan y pin. Chwyddwch, yna cadarnhewch eich man.', confirm: 'Cadarnhau fy man', loading: 'Llwytho’r map…', reset: 'Yr ardal gyfan', score: 'Pwyntiau', hint: 'Ffyrdd, afon, arfordir. Chi sydd â’r gweddill.', next: 'Y lle nesaf', results: 'Gweld fy nghanlyniadau', away: 'o’r man', right: 'Y man cywir', yours: 'Eich dyfaliad', fact: 'Tipyn o wybodaeth leol', source: 'Darllen mwy', finished: 'Eich taith ar hyd y Teifi.', done: 'Tri lle. Un gornel hyfryd o Gymru.', share: 'Rhannu fy sgôr', copy: 'Copïo’r canlyniad', copied: 'Wedi copïo’r canlyniad.', manual: 'Dewiswch a chopïwch eich canlyniad isod.', practiceButton: 'Rhoi cynnig ar gêm ymarfer', dailyButton: 'Yn ôl i her y dydd', practiceNote: 'Ymarfer · mae eich sgôr ddyddiol yn ddiogel', footer: 'Tri lle · un afon · bob dydd', tolerance: 'O fewn 50 m am y pwyntiau llawn. Anelwch at ganol y lle.', scoring: '1× · 2× · 3× — hyd at 600 pwynt', retry: 'Ail-lwytho’r map', mapError: 'Methu llwytho’r map. Gwiriwch eich cysylltiad a rhowch gynnig arall.', storage: 'Ni ellir cadw cynnydd yn y porwr hwn. Cadwch y tab ar agor.', fresh: 'Mae her ddyddiol newydd yn barod.', freshButton: 'Chwarae her heddiw', close: 'Cau', about: 'Sut i chwarae', welcome: 'Dilynwch yr afon. Dewch o hyd i’ch ffordd.', explanation: 'Tri lle o amgylch Aberteifi, Llandudoch, Gwbert a Chilgerran. Dim labeli a dim amserydd. Rhowch y pin dros bob lle a chadarnhewch. Hyd at 100 pwynt ym mhob rownd, wedi eu lluosi ag 1, 2 a 3. Cedwir eich cynnydd ar y ddyfais hon.', local: 'Her ddyddiol i’r teulu · dim ailadrodd lleoedd', north: 'Gogledd', distance: 'Pellter', weighted: 'Pwyntiau wedi eu lluosi' },
 };
-let lang = 'en', saved, storageOK = true;
-try { lang = localStorage.getItem('teifitap.language') === 'cy' ? 'cy' : 'en'; saved = JSON.parse(localStorage.getItem(KEY)); } catch { storageOK = false; }
-let places = [...dailyPlaces, ...catalogue.places];
-let game = validGame(saved, dailyPlaces) && (saved.date === londonDate() || saved.phase !== 'complete') ? saved : newGame(londonDate(), dailyPlaces);
+let lang = 'en', history = {}, storageOK = true;
+try { lang = localStorage.getItem('teifitap.language') === 'cy' ? 'cy' : 'en'; history = readHistory(localStorage,schedule); } catch { storageOK = false; }
+let places = [...dailyPlaces, ...starterPlaces, ...catalogue.places];
+let game = restoreDaily(schedule,londonDate(),history);
 let map, ready = false, mapFailed = false, revealMarkers = [], lastView = '', sharing = false;
 // The browser regression exercises the real app's gesture handlers and layout.
 export { map };
@@ -35,11 +38,11 @@ function startPractice() {
     toast(lang === 'en' ? 'Practice needs at least one place at each difficulty. Check the catalogue edits.' : 'Mae angen o leiaf un lle ar bob lefel anhawster. Gwiriwch y catalog.');
     return;
   }
-  places = [...dailyPlaces,...pool];
+  places = [...pool,...dailyPlaces,...starterPlaces];
   game = newGame(londonDate(),pool,'practice',[...crypto.getRandomValues(new Uint32Array(4))].join(':'));
   render(); updateMap(); document.querySelector('#panel').scrollTop=0;
 }
-function persist() { if (game.mode !== 'daily') return; try { localStorage.setItem(KEY, JSON.stringify(game)); } catch { storageOK = false; } }
+function persist() { if (game.mode !== 'daily') return; history[game.date]=game; try { localStorage.setItem(KEY, JSON.stringify(history)); } catch { storageOK = false; } }
 
 document.querySelector('#app').innerHTML = `
   <header class="masthead"><a class="brand" href="./" aria-label="TeifiTap home"><span class="brand-mark" aria-hidden="true">⌖</span>Teifi<span>Tap</span><small>ABERTEIFI & BRO</small></a><div class="header-right"><span id="date"></span><button id="language" class="text-button"></button><button id="about" class="help-button" aria-label="How to play">?</button></div></header>
@@ -57,7 +60,8 @@ function render() {
   document.querySelector('#about').setAttribute('aria-label', t('about'));
   document.querySelector('#close-help').textContent = `${t('close')} ×`;
   document.querySelector('#welcome').textContent = t('welcome');
-  document.querySelector('#explanation').textContent = t('explanation');
+  const stats=historyStats(history,londonDate());
+  document.querySelector('#explanation').textContent = t('explanation') + (lang === 'en' ? ` Completed days: ${stats.played}. Current streak: ${stats.streak}. Saved in this browser only.` : ` Dyddiau wedi eu cwblhau: ${stats.played}. Rhediad presennol: ${stats.streak}. Cedwir yn y porwr hwn yn unig.`);
   document.querySelector('#scoring-help').textContent = `${t('scoring')} · ${t('tolerance')}`;
   document.querySelector('#footer-line').textContent = t('footer');
   document.querySelector('#local-note').textContent = game.mode === 'practice' ? (lang === 'en' ? 'Practice · 33-place catalogue' : 'Ymarfer · catalog o 33 lle') : t('local');
@@ -84,7 +88,7 @@ function render() {
   } else {
     body = `<div class="complete"><div class="seal" aria-hidden="true">⌖</div><h1>${t('finished')}</h1><p>${t('done')}</p><div class="final-score">${total(game.answers)}<span>/ 600</span></div><p class="eyebrow">${t('score')}</p></div><div class="breakdown">${game.answers.map((a, i) => { const q = placeCopy(places.find(p => p.id === a.id)); return `<div><span class="row-emoji">${emoji(a.score)}</span><span>${q.name}<small>${q.town} · ${distanceLabel(a.distance)}</small></span><b>${a.score}<small>×${WEIGHTS[i]}</small></b></div>`; }).join('')}</div><div class="panel-bottom"><button id="share" class="primary">${t('share')} ↗</button><button id="copy" class="secondary">${t('copy')}</button><textarea id="manual-share" readonly hidden aria-label="Result"></textarea></div>`;
   }
-  panel.innerHTML = `<div class="panel-heading"><p class="eyebrow">${modeLabel}</p><span class="running-score">${total(game.answers)} <small>${t('score').toLowerCase()}</small></span></div><div class="progress" aria-label="${t('round')} ${round + 1} ${t('of')} 3">${progress}</div>${body}${areaNote}<button id="practice" class="text-button wide">${t('practiceButton')} →</button>${game.mode === 'practice' ? `<button id="daily" class="text-button wide">← ${t('dailyButton')}</button><p class="small centre">${t('practiceNote')}</p>` : ''}${!storageOK ? `<p class="warning">${t('storage')}</p>` : ''}${game.date !== londonDate() ? `<div class="new-day"><p>${t('fresh')}</p><button id="fresh" class="secondary">${t('freshButton')}</button></div>` : ''}`;
+  panel.innerHTML = `<div class="panel-heading"><p class="eyebrow">${modeLabel}</p><span class="running-score">${total(game.answers)} <small>${t('score').toLowerCase()}</small></span></div><div class="progress" aria-label="${t('round')} ${round + 1} ${t('of')} 3">${progress}</div>${body}${areaNote}<button id="practice" class="text-button wide">${t('practiceButton')} →</button>${game.mode === 'practice' ? `<button id="daily" class="text-button wide">← ${t('dailyButton')}</button><p class="small centre">${t('practiceNote')}</p>` : ''}${!storageOK ? `<p class="warning">${t('storage')}</p>` : ''}${game.mode === 'daily' && game.date !== londonDate() ? `<div class="new-day">${scheduledDay(schedule,londonDate()).date !== game.date ? `<p>${t('fresh')}</p><button id="fresh" class="secondary">${t('freshButton')}</button>` : `<p>${lang === 'en' ? 'This is the latest daily puzzle. More places will follow.' : 'Dyma’r her ddyddiol ddiweddaraf. Bydd rhagor o leoedd yn dilyn.'}</p>`}</div>` : ''}`;
   panel.querySelector('#confirm')?.addEventListener('click', () => {
     if (!ready || game.phase !== 'guess' || map.isMoving() || !map.areTilesLoaded()) return;
     game = submit(game, map.getCenter().toArray(), places); persist(); render(); updateMap();
@@ -94,14 +98,15 @@ function render() {
   panel.querySelector('#copy')?.addEventListener('click', doCopy);
   panel.querySelector('#practice')?.addEventListener('click', startPractice);
   panel.querySelector('#daily')?.addEventListener('click', loadDaily);
-  panel.querySelector('#fresh')?.addEventListener('click', () => { game = newGame(londonDate(), dailyPlaces); persist(); render(); updateMap(); });
+  panel.querySelector('#fresh')?.addEventListener('click', () => { game = restoreDaily(schedule,londonDate(),history); persist(); render(); updateMap(); });
   document.querySelector('#pin').hidden = game.phase !== 'guess';
   document.querySelector('#legend').innerHTML = game.phase === 'reveal' ? `<span><i class="guess-dot"></i>${t('yours')}</span><span><i class="answer-dot"></i>${t('right')}</span>` : '';
   updateReady();
 }
 function loadDaily() {
-  let stored; try { stored = JSON.parse(localStorage.getItem(KEY)); } catch { /* fallback below */ }
-  game = validGame(stored, dailyPlaces) && (stored.date === londonDate() || stored.phase !== 'complete') ? stored : newGame(londonDate(), dailyPlaces);
+  try { history=readHistory(localStorage,schedule); } catch { /* retain in-memory history */ }
+  places=[...dailyPlaces,...starterPlaces,...catalogue.places];
+  game=restoreDaily(schedule,londonDate(),history);
   render(); updateMap();
 }
 function updateReady() {
@@ -194,7 +199,7 @@ document.querySelector('#about').addEventListener('click', () => document.queryS
 document.querySelector('#close-help').addEventListener('click', () => document.querySelector('#help').close());
 if (import.meta.env.DEV) {
   const button = document.createElement('button'); button.id = 'reset-test'; button.className = 'secondary';
-  button.addEventListener('click', () => { game = newGame(londonDate(), dailyPlaces); persist(); lastView = ''; render(); updateMap(); document.querySelector('#help').close(); });
+  button.addEventListener('click', () => { game = scheduledGame(schedule,londonDate()); persist(); lastView = ''; render(); updateMap(); document.querySelector('#help').close(); });
   document.querySelector('#help').append(button);
 }
 document.addEventListener('visibilitychange', () => { if (!document.hidden) render(); });

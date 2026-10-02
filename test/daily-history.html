@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Daily history regression</title><h1>Daily history regression</h1><pre id="result">Running…</pre><script type="module">
+const key='teifitap.scheduled-days.v1', backup=localStorage.getItem(key), output=document.querySelector('#result');
+const frame=document.createElement('iframe');frame.style='width:390px;height:844px';document.body.append(frame);
+const wait=async fn=>{const until=Date.now()+30000;while(!fn()){if(Date.now()>until)throw Error('Timed out waiting for game');await new Promise(r=>requestAnimationFrame(r));}};
+const check=(ok,msg)=>{if(!ok)throw Error(msg);};
+try{
+ localStorage.removeItem(key);frame.src='/';await wait(()=>frame.contentDocument?.querySelector('#confirm'));
+ for(let i=0;i<3;i++){
+  await wait(()=>frame.contentDocument.querySelector('#confirm')&&!frame.contentDocument.querySelector('#confirm').disabled);
+  frame.contentDocument.querySelector('#confirm').click();
+  check(frame.contentDocument.querySelector('#next'),'Guess reveals answer');
+  frame.contentDocument.querySelector('#next').click();
+ }
+ check(frame.contentDocument.querySelector('#share'),'Completed results');
+ const saved=localStorage.getItem(key);check(Object.values(JSON.parse(saved))[0].phase==='complete','Completed daily is persisted');
+ frame.contentWindow.location.reload();await wait(()=>frame.contentDocument?.querySelector('#share'));
+ frame.contentDocument.querySelector('#practice').click();check(frame.contentDocument.querySelector('#app').dataset.mode==='practice','Practice active');
+ check(localStorage.getItem(key)===saved,'Practice must not alter history');
+ frame.contentDocument.querySelector('#daily').click();check(frame.contentDocument.querySelector('#share'),'Daily result restored from practice');
+ frame.contentDocument.querySelector('#about').click();check(frame.contentDocument.querySelector('#explanation').textContent.includes('Completed days: 1. Current streak: 1.'),'History and streak displayed');
+ output.textContent='PASS: daily completion saved; reload restores result; practice preserves history; returning restores result; help shows one completed day and streak. Original browser history restored.';
+}catch(error){output.textContent='FAIL: '+error.message;}finally{if(backup===null)localStorage.removeItem(key);else localStorage.setItem(key,backup);frame.remove();}
+</script></html>

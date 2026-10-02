@@ -57,3 +57,9 @@ See src/places.js for per-record source and coordinate links. Five points are Ca
 4. Same-browser result history and streaks: key by UK puzzle date, update once on daily completion, ignore practice, preserve across refresh and schema migration, and test missed days/DST. No account needed.
 5. Right-street bonus (version 0.5): accepted street segments, not nearest-name heuristics.
 6. HTTPS hosting and real-device native sharing.
+
+## Family launch, 2 October 2026
+
+Published `data/daily-schedule.json` freezes seven daily puzzles, with distinct point IDs across the entire schedule, one at each difficulty. This ledger, rather than individual players’ storage, prevents repeat allocation and preserves shared puzzles. Extend by appending unused IDs and retaining past records. When dates run out, retain the final dated puzzle and show an explicit notice; never silently recycle.
+
+`src/daily.js` validates date-indexed browser history against the schedule and derives completed-day count and current streak. The launch key is separate from earlier test storage. Practice reads local catalogue edits and never writes daily history. Scheduled daily prompts use frozen published snapshots, unaffected by draft edits. No cross-device accounts or result-history browsing UI yet.
