@@ -2,7 +2,9 @@ import * as maplibregl from 'maplibre-gl';
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import './style.css';
-import { places } from './places.js';
+import { places as dailyPlaces } from './places.js';
+import catalogue from '../data/location-catalogue.json';
+import { applyEdits, readEdits } from './catalogue-store.js';
 import { bounds, home, mapStyle } from './map-style.js';
 import { cameraOptions, limitZoomToArea } from './map-camera.js';
 import { londonDate, displayDate, newGame, validGame, submit, advance, total, emoji, shareText, WEIGHTS } from './game.js';
@@ -15,7 +17,8 @@ const copy = {
 };
 let lang = 'en', saved, storageOK = true;
 try { lang = localStorage.getItem('teifitap.language') === 'cy' ? 'cy' : 'en'; saved = JSON.parse(localStorage.getItem(KEY)); } catch { storageOK = false; }
-let game = validGame(saved, places) && (saved.date === londonDate() || saved.phase !== 'complete') ? saved : newGame(londonDate(), places);
+let places = [...dailyPlaces, ...catalogue.places];
+let game = validGame(saved, dailyPlaces) && (saved.date === londonDate() || saved.phase !== 'complete') ? saved : newGame(londonDate(), dailyPlaces);
 let map, ready = false, mapFailed = false, revealMarkers = [], lastView = '', sharing = false;
 // The browser regression exercises the real app's gesture handlers and layout.
 export { map };
@@ -23,6 +26,19 @@ const t = key => copy[lang][key];
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const formatDate = date => displayDate(date, lang);
 const distanceLabel = metres => metres < 1000 ? `${Math.round(metres)} m` : `${(metres / 1000).toFixed(2)} km`;
+const escapeHtml = text => text.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const placeCopy = p => Object.fromEntries(Object.entries(p[lang]).map(([key,value])=>[key,escapeHtml(value)]));
+function startPractice() {
+  let edits = {}; try { edits = readEdits(localStorage); } catch { /* browser storage unavailable */ }
+  const pool = applyEdits(catalogue,edits).places;
+  if ([1,2,3].some(d=>!pool.some(p=>p.difficulty===d))) {
+    toast(lang === 'en' ? 'Practice needs at least one place at each difficulty. Check the catalogue edits.' : 'Mae angen o leiaf un lle ar bob lefel anhawster. Gwiriwch y catalog.');
+    return;
+  }
+  places = [...dailyPlaces,...pool];
+  game = newGame(londonDate(),pool,'practice',[...crypto.getRandomValues(new Uint32Array(4))].join(':'));
+  render(); updateMap(); document.querySelector('#panel').scrollTop=0;
+}
 function persist() { if (game.mode !== 'daily') return; try { localStorage.setItem(KEY, JSON.stringify(game)); } catch { storageOK = false; } }
 
 document.querySelector('#app').innerHTML = `
@@ -44,7 +60,7 @@ function render() {
   document.querySelector('#explanation').textContent = t('explanation');
   document.querySelector('#scoring-help').textContent = `${t('scoring')} · ${t('tolerance')}`;
   document.querySelector('#footer-line').textContent = t('footer');
-  document.querySelector('#local-note').textContent = t('local');
+  document.querySelector('#local-note').textContent = game.mode === 'practice' ? (lang === 'en' ? 'Practice · 33-place catalogue' : 'Ymarfer · catalog o 33 lle') : t('local');
   if (map) {
     map.getCanvas().setAttribute('aria-label', lang === 'en' ? 'Unlabelled map. Use arrow keys to pan and plus or minus to zoom.' : 'Map heb labeli. Defnyddiwch y bysellau saeth i symud.');
     document.querySelector('.maplibregl-ctrl-zoom-in')?.setAttribute('aria-label', lang === 'en' ? 'Zoom in' : 'Chwyddo');
@@ -55,7 +71,8 @@ function render() {
   const panel = document.querySelector('#panel');
   const round = Math.min(2, game.phase === 'guess' ? game.answers.length : game.answers.length - 1);
   const place = places.find(p => p.id === game.ids[Math.max(0, round)]);
-  const p = place[lang];
+  const p = placeCopy(place);
+  const areaNote = game.mode === 'practice' && place.targetType === 'area' ? `<p class="small">${lang === 'en' ? 'Draft area target: aim for its reference centre. Area scoring will follow.' : 'Man ardal drafft: anelwch at ei ganol cyfeirio. Daw sgorio ardaloedd yn ddiweddarach.'}</p>` : '';
   const progress = WEIGHTS.map((w, i) => `<span class="step ${game.answers[i] ? 'answered' : i === round ? 'current' : ''}"><b>${game.answers[i] ? game.answers[i].score : i + 1}</b><small>×${w}</small></span>`).join('<span class="step-line"></span>');
   const modeLabel = t(game.mode === 'practice' ? 'practice' : 'daily');
   let body = '';
@@ -65,9 +82,9 @@ function render() {
     const a = game.answers.at(-1);
     body = `<div class="reveal-heading"><span class="result-emoji">${emoji(a.score)}</span><p class="eyebrow">${t('right')}</p><h1>${p.name}<span>${p.town}</span></h1></div><div class="result-numbers"><div><strong>${distanceLabel(a.distance)}</strong><span>${t('away')}</span></div><div><strong>${a.score}<small> × ${WEIGHTS[round]}</small></strong><span>${a.score * WEIGHTS[round]} ${t('score').toLowerCase()}</span></div></div><article class="fact"><p class="eyebrow">${t('fact')}</p><p>${p.fact}</p><a href="${place.source}" target="_blank" rel="noopener noreferrer">${t('source')} ↗</a></article><div class="panel-bottom"><button id="next" class="primary">${t(game.answers.length === 3 ? 'results' : 'next')} <span>→</span></button></div>`;
   } else {
-    body = `<div class="complete"><div class="seal" aria-hidden="true">⌖</div><h1>${t('finished')}</h1><p>${t('done')}</p><div class="final-score">${total(game.answers)}<span>/ 600</span></div><p class="eyebrow">${t('score')}</p></div><div class="breakdown">${game.answers.map((a, i) => { const q = places.find(p => p.id === a.id)[lang]; return `<div><span class="row-emoji">${emoji(a.score)}</span><span>${q.name}<small>${q.town} · ${distanceLabel(a.distance)}</small></span><b>${a.score}<small>×${WEIGHTS[i]}</small></b></div>`; }).join('')}</div><div class="panel-bottom"><button id="share" class="primary">${t('share')} ↗</button><button id="copy" class="secondary">${t('copy')}</button><textarea id="manual-share" readonly hidden aria-label="Result"></textarea><button id="practice" class="text-button wide">${t('practiceButton')} →</button></div>`;
+    body = `<div class="complete"><div class="seal" aria-hidden="true">⌖</div><h1>${t('finished')}</h1><p>${t('done')}</p><div class="final-score">${total(game.answers)}<span>/ 600</span></div><p class="eyebrow">${t('score')}</p></div><div class="breakdown">${game.answers.map((a, i) => { const q = placeCopy(places.find(p => p.id === a.id)); return `<div><span class="row-emoji">${emoji(a.score)}</span><span>${q.name}<small>${q.town} · ${distanceLabel(a.distance)}</small></span><b>${a.score}<small>×${WEIGHTS[i]}</small></b></div>`; }).join('')}</div><div class="panel-bottom"><button id="share" class="primary">${t('share')} ↗</button><button id="copy" class="secondary">${t('copy')}</button><textarea id="manual-share" readonly hidden aria-label="Result"></textarea></div>`;
   }
-  panel.innerHTML = `<div class="panel-heading"><p class="eyebrow">${modeLabel}</p><span class="running-score">${total(game.answers)} <small>${t('score').toLowerCase()}</small></span></div><div class="progress" aria-label="${t('round')} ${round + 1} ${t('of')} 3">${progress}</div>${body}${game.mode === 'practice' ? `<button id="daily" class="text-button wide">← ${t('dailyButton')}</button><p class="small centre">${t('practiceNote')}</p>` : ''}${!storageOK ? `<p class="warning">${t('storage')}</p>` : ''}${game.date !== londonDate() ? `<div class="new-day"><p>${t('fresh')}</p><button id="fresh" class="secondary">${t('freshButton')}</button></div>` : ''}`;
+  panel.innerHTML = `<div class="panel-heading"><p class="eyebrow">${modeLabel}</p><span class="running-score">${total(game.answers)} <small>${t('score').toLowerCase()}</small></span></div><div class="progress" aria-label="${t('round')} ${round + 1} ${t('of')} 3">${progress}</div>${body}${areaNote}<button id="practice" class="text-button wide">${t('practiceButton')} →</button>${game.mode === 'practice' ? `<button id="daily" class="text-button wide">← ${t('dailyButton')}</button><p class="small centre">${t('practiceNote')}</p>` : ''}${!storageOK ? `<p class="warning">${t('storage')}</p>` : ''}${game.date !== londonDate() ? `<div class="new-day"><p>${t('fresh')}</p><button id="fresh" class="secondary">${t('freshButton')}</button></div>` : ''}`;
   panel.querySelector('#confirm')?.addEventListener('click', () => {
     if (!ready || game.phase !== 'guess' || map.isMoving() || !map.areTilesLoaded()) return;
     game = submit(game, map.getCenter().toArray(), places); persist(); render(); updateMap();
@@ -75,16 +92,16 @@ function render() {
   panel.querySelector('#next')?.addEventListener('click', () => { game = advance(game); persist(); render(); updateMap(); panel.scrollTop = 0; });
   panel.querySelector('#share')?.addEventListener('click', doShare);
   panel.querySelector('#copy')?.addEventListener('click', doCopy);
-  panel.querySelector('#practice')?.addEventListener('click', () => { game = newGame(londonDate(), places, 'practice', `practice:${Date.now()}`); render(); updateMap(); panel.scrollTop = 0; });
+  panel.querySelector('#practice')?.addEventListener('click', startPractice);
   panel.querySelector('#daily')?.addEventListener('click', loadDaily);
-  panel.querySelector('#fresh')?.addEventListener('click', () => { game = newGame(londonDate(), places); persist(); render(); updateMap(); });
+  panel.querySelector('#fresh')?.addEventListener('click', () => { game = newGame(londonDate(), dailyPlaces); persist(); render(); updateMap(); });
   document.querySelector('#pin').hidden = game.phase !== 'guess';
   document.querySelector('#legend').innerHTML = game.phase === 'reveal' ? `<span><i class="guess-dot"></i>${t('yours')}</span><span><i class="answer-dot"></i>${t('right')}</span>` : '';
   updateReady();
 }
 function loadDaily() {
   let stored; try { stored = JSON.parse(localStorage.getItem(KEY)); } catch { /* fallback below */ }
-  game = validGame(stored, places) && (stored.date === londonDate() || stored.phase !== 'complete') ? stored : newGame(londonDate(), places);
+  game = validGame(stored, dailyPlaces) && (stored.date === londonDate() || stored.phase !== 'complete') ? stored : newGame(londonDate(), dailyPlaces);
   render(); updateMap();
 }
 function updateReady() {
@@ -177,7 +194,7 @@ document.querySelector('#about').addEventListener('click', () => document.queryS
 document.querySelector('#close-help').addEventListener('click', () => document.querySelector('#help').close());
 if (import.meta.env.DEV) {
   const button = document.createElement('button'); button.id = 'reset-test'; button.className = 'secondary';
-  button.addEventListener('click', () => { game = newGame(londonDate(), places); persist(); lastView = ''; render(); updateMap(); document.querySelector('#help').close(); });
+  button.addEventListener('click', () => { game = newGame(londonDate(), dailyPlaces); persist(); lastView = ''; render(); updateMap(); document.querySelector('#help').close(); });
   document.querySelector('#help').append(button);
 }
 document.addEventListener('visibilitychange', () => { if (!document.hidden) render(); });

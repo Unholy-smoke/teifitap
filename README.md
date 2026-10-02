@@ -44,13 +44,15 @@ npm test
 npm run build
 ```
 
-The production build is in dist/. No account, API key or backend is needed for this version. Nine unit tests cover dates/DST, scoring, saved-state validation, round flow, deterministic selection, catalogue completeness and map constraints. Open /test/map-boundaries.html on the development server for a real MapLibre geometry regression covering target/corner reachability and responsive zoom limits across viewport dimensions.
+The production build is in dist/. No account, API key or backend is needed for this version. Eleven unit tests cover dates/DST, scoring, saved-state validation, round flow, deterministic selection, catalogue completeness and map constraints. Open /test/map-boundaries.html on the development server for a real MapLibre geometry regression covering target/corner reachability and responsive zoom limits across viewport dimensions.
 
 Open /test/mobile-gestures.html at a phone-sized viewport for the touch regression. It sends continuous one-finger drag and two-finger pinch events through the real app, checks movement across successive frames, and rejects map resizing during either gesture. This browser test supplements physical-phone testing.
 
 ## Map and content
 
-The first expanded [JSON catalogue](data/location-catalogue.json) contains 33 researched owner-supplied candidates at difficulties 1–3. Each has English/Welsh copy, source links, a reference coordinate and review notes. It is a research draft, separate from the five active starter locations. See the [readable catalogue](docs/location-catalogue.md), regenerated with `node scripts/render-catalogue.js`, or open `/catalogue.html` for an interactive pin and fact review. The review page contains spoilers and is deliberately not linked from the game.
+The first expanded [JSON catalogue](data/location-catalogue.json) contains 33 researched owner-supplied candidates at difficulties 1–3. Each has English/Welsh copy, source links, a reference coordinate and review notes. Practice draws one random candidate at each difficulty; the daily game retains its five starter locations. See the [readable catalogue](docs/location-catalogue.md), regenerated with `node scripts/render-catalogue.js`, or open `/catalogue.html` to edit names, towns and facts in both languages, difficulty and location. Drag the pin or tap the map to move it. The page contains spoilers and is deliberately not linked from the game.
+
+Catalogue edits save in this browser and apply to new practice games on the same origin. They do not update GitHub or other devices automatically. Download the edited JSON and return it for publishing. Navigating between places saves valid edits; invalid coordinates or blank fields must be corrected first. Open `/test/catalogue-editor.html` locally to verify persistence and export without retaining test edits.
 
 Area entries (villages, estate, club grounds and quarry) require agreed scoring boundaries before activation. Approximate documentary coordinates and conflicting business pins are explicitly flagged. Penparc's mapped village centre already fits the current bounds. Welsh wording needs local review.
 

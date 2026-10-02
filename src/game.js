@@ -29,7 +29,12 @@ export function selectPlaces(seed, places) {
   return [...places].sort((a, b) => hash(`${seed}:${a.id}`) - hash(`${seed}:${b.id}`) || a.id.localeCompare(b.id)).slice(0, 3).sort((a, b) => a.difficulty - b.difficulty || a.id.localeCompare(b.id));
 }
 export function newGame(date, places, mode = 'daily', seed = date) {
-  return { version: VERSION, date, mode, ids: selectPlaces(seed, places).map(p => p.id), answers: [], phase: 'guess' };
+  const chosen = mode === 'practice' ? [1,2,3].map(difficulty => {
+    const candidates = places.filter(p => p.difficulty === difficulty);
+    if (!candidates.length) throw new Error(`No practice locations at difficulty ${difficulty}`);
+    return candidates.sort((a,b) => hash(`${seed}:${a.id}`)-hash(`${seed}:${b.id}`) || a.id.localeCompare(b.id))[0];
+  }) : selectPlaces(seed,places);
+  return { version: VERSION, date, mode, ids: chosen.map(p => p.id), answers: [], phase: 'guess' };
 }
 export function validGame(game, places) {
   if (!game || game.version !== VERSION || game.mode !== 'daily' || !/^\d{4}-\d{2}-\d{2}$/.test(game.date) || !Array.isArray(game.ids) || game.ids.length !== 3 || new Set(game.ids).size !== 3 || game.ids.some(id => !places.some(p => p.id === id)) || !Array.isArray(game.answers) || game.answers.length > 3 || !['guess', 'reveal', 'complete'].includes(game.phase)) return false;

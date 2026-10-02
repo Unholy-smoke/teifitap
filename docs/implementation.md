@@ -4,6 +4,10 @@ Initially implemented 1 October 2026. Static Vite application, vanilla JavaScrip
 
 ## 2 October: expanded catalogue and zoom limits
 
+Subsequent update: catalogue practice now selects one location at each of difficulties 1, 2 and 3 using a fresh random seed; all 33 drafts are available for practice only. Practice can be entered from any daily phase and leaves daily progress untouched. Area scoring still uses the provisional reference centre, with a visible note.
+
+The review page is now an editor. A validated per-record patch in `teifitap.catalogue-edits.v1` stores English/Welsh names, towns, facts, coordinates and difficulty. Navigating saves valid changes; invalid forms stay open. Pin dragging/map taps change coordinates within the existing bounds. Save errors leave changes in memory and point the user to JSON export. Exports contain the full catalogue with edits. New practice games read those edits. Publishing remains an explicit file update; browser storage is not a shared backend.
+
 The 33 owner-supplied candidates are stored in `data/location-catalogue.json`, with difficulties 1–3, bilingual draft facts, source links, reference coordinates, target types and review notes. They remain separate from the five active starter targets until pins and area scoring are reviewed. `scripts/render-catalogue.js` generates the Markdown companion. The deployed `/catalogue.html` page steps through each pin and fact without changing game progress; it contains answers and is not linked from the game.
 
 The owner confirmed Teifi Boating Club at difficulty 2, Banc-y-Warren as the summit, and Pont y Cleifion as the A487 bypass bridge (mapped as Priory Bridge). All catalogue reference points, including Penparc, fit the existing bounds. Villages, estate, club grounds and quarry need accepted polygons: their single reference points must not become precise scoring targets.

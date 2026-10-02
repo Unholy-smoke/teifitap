@@ -1,0 +1,30 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Catalogue editor regression</title></head><body><h1>Catalogue editor regression</h1><pre id="result">Running…</pre><iframe id="editor" title="Real catalogue editor" style="width:390px;height:844px"></iframe><script type="module">
+import { CATALOGUE_KEY } from '../src/catalogue-store.js';
+const frame=document.querySelector('#editor'),result=document.querySelector('#result');
+const backup=localStorage.getItem(CATALOGUE_KEY);
+const wait=async predicate=>{for(let i=0;i<200;i++){if(predicate())return;await new Promise(r=>setTimeout(r,50));}throw Error('Timed out waiting for editor');};
+try{
+  localStorage.removeItem(CATALOGUE_KEY);frame.src='../catalogue.html';
+  await wait(()=>frame.contentDocument?.querySelector('#en-name'));
+  let doc=frame.contentDocument;
+  const originalName=doc.querySelector('#en-name').value;
+  function fill(id,value){const field=doc.querySelector(id);field.value=value;field.dispatchEvent(new Event('input',{bubbles:true}));}
+  fill('#en-name','Editor regression place');fill('#en-fact','A test fact <with brackets>.');fill('#longitude','-4.65');fill('#latitude','52.08');fill('#difficulty','2');
+  doc.querySelector('#edit-place').requestSubmit();
+  const saved=JSON.parse(localStorage.getItem(CATALOGUE_KEY));
+  const id=Object.keys(saved)[0];
+  if(saved[id].en.name!=='Editor regression place'||saved[id].difficulty!==2||saved[id].coord[0]!==-4.65)throw Error('Edits not saved');
+  frame.contentWindow.location.reload();await wait(()=>frame.contentDocument!==doc&&frame.contentDocument?.querySelector('#en-name'));
+  doc=frame.contentDocument;
+  if(doc.querySelector('#en-name').value!=='Editor regression place'||doc.querySelector('#en-fact').value!=='A test fact <with brackets>.')throw Error('Reload lost edits or corrupted text');
+  fill('#en-name','Saved by navigation');doc.querySelector('#next').click();doc.querySelector('#previous').click();
+  if(doc.querySelector('#en-name').value!=='Saved by navigation')throw Error('Navigation discarded changes');
+  const link=doc.querySelector('#download');link.addEventListener('click',e=>e.preventDefault());link.click();
+  const exported=await(await fetch(link.href)).json();
+  if(exported.places.length!==33||exported.places[0].en.name!=='Saved by navigation')throw Error('Export does not include edits');
+  fill('#longitude','-5');doc.querySelector('#edit-place').requestSubmit();
+  if(JSON.parse(localStorage.getItem(CATALOGUE_KEY))[id].coord[0]===-5)throw Error('Outside location accepted');
+  fill('#longitude','-4.65');doc.querySelector('#edit-place').requestSubmit();
+  result.textContent='PASS: names, facts, coordinates and difficulty saved; reload and navigation preserve edits; JSON export contains all 33 entries and edits; outside pins rejected; original browser edits restored.';
+}catch(error){result.textContent=`FAIL: ${error.message}`;}finally{if(backup===null)localStorage.removeItem(CATALOGUE_KEY);else localStorage.setItem(CATALOGUE_KEY,backup);frame.remove();}
+</script></body></html>
