@@ -17,6 +17,8 @@ let lang = 'en', saved, storageOK = true;
 try { lang = localStorage.getItem('teifitap.language') === 'cy' ? 'cy' : 'en'; saved = JSON.parse(localStorage.getItem(KEY)); } catch { storageOK = false; }
 let game = validGame(saved, places) && (saved.date === londonDate() || saved.phase !== 'complete') ? saved : newGame(londonDate(), places);
 let map, ready = false, mapFailed = false, revealMarkers = [], lastView = '', sharing = false;
+// The browser regression exercises the real app's gesture handlers and layout.
+export { map };
 const t = key => copy[lang][key];
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const formatDate = date => displayDate(date, lang);
@@ -87,7 +89,11 @@ function loadDaily() {
 }
 function updateReady() {
   const button = document.querySelector('#confirm');
-  if (button) { button.disabled = !ready; button.textContent = ready ? `${t('confirm')} →` : t('loading'); }
+  if (button) {
+    button.disabled = !ready;
+    // Keep the action bar stable during a gesture; it is not a new map load.
+    button.textContent = ready || map?.isStyleLoaded() ? `${t('confirm')} →` : t('loading');
+  }
 }
 function toast(text) { const e = document.querySelector('#toast'); e.textContent = text; e.classList.add('visible'); clearTimeout(toast.timer); toast.timer = setTimeout(() => e.classList.remove('visible'), 3500); }
 function resultText() { return shareText(game, lang, `${location.origin}${location.pathname}`); }
@@ -176,4 +182,4 @@ if (import.meta.env.DEV) {
 document.addEventListener('visibilitychange', () => { if (!document.hidden) render(); });
 setInterval(() => { if (game.date !== londonDate() && !document.querySelector('#fresh')) render(); }, 30000);
 render(); persist(); initialiseMap();
-new ResizeObserver(() => map?.resize()).observe(document.querySelector('.map-wrap'));
+// MapLibre observes its own container, including responsive layout changes.

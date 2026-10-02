@@ -6,6 +6,7 @@
 
 .brand small{white-space:nowrap}.question h1 span::before{content:' ';white-space:pre}@media(max-width:760px){.question h1 span{margin-left:0}}
 /* Keep the map dominant, with a small prompt and a thumb-friendly action bar. */
+.primary,.secondary{line-height:1.5}
 .mobile-round,.mobile-instruction{display:none}
 @media(min-width:761px){.play-layout{grid-template-columns:330px 1fr}.panel{padding:26px 24px}.guide{margin-top:28px}.question h1{font-size:30px}}
 @media(max-width:760px){

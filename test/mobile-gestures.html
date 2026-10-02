@@ -1,0 +1,44 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TeifiTap touch regression</title></head><body><div id="app"></div><pre id="result" style="position:fixed;top:0;left:0;background:white;z-index:100;font:12px monospace;max-width:100%;white-space:pre-wrap">Running touch regression…</pre><script type="module">
+import {map} from '../src/main.js';
+import {home} from '../src/map-style.js';
+const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+const frame=()=>pause(35);
+while(!map.loaded()||map.isMoving())await pause(100);
+const canvas=map.getCanvas();
+const result=document.querySelector('#result');
+const failures=[];const measurements={};
+const resizeCalls=[];
+const resize=map.resize.bind(map);
+map.resize=(...args)=>{resizeCalls.push({width:canvas.clientWidth,height:canvas.clientHeight});return resize(...args);};
+const send=(type,coords)=>{
+  const rect=canvas.getBoundingClientRect();
+  const touches=coords.map(([x,y],identifier)=>new Touch({identifier,target:canvas,clientX:rect.left+x,clientY:rect.top+y}));
+  canvas.dispatchEvent(new TouchEvent(type,{bubbles:true,cancelable:true,touches,targetTouches:touches,changedTouches:touches}));
+};
+map.jumpTo({...home,zoom:15});await pause(200);
+const x=canvas.clientWidth/2,y=canvas.clientHeight/2;
+const before=map.getCenter().toArray();let panFrames=0;
+send('touchstart',[[x-65,y]]);
+let previous=map.getCenter().lng;
+for(let i=1;i<=20;i++){send('touchmove',[[x-65+i*6,y]]);await frame();if(Math.abs(map.getCenter().lng-previous)>1e-8)panFrames++;previous=map.getCenter().lng;}
+send('touchend',[]);await pause(500);
+measurements.panFrames=panFrames;measurements.panDegrees=map.getCenter().lng-before[0];
+measurements.panResize=resizeCalls.splice(0);
+if(panFrames<18)failures.push(`Drag interrupted: only ${panFrames}/20 moving frames`);
+if(measurements.panResize.length)failures.push('Map resized during drag');
+map.jumpTo({...home,zoom:14});await pause(200);
+const zoom=map.getZoom();let zoomFrames=0;
+send('touchstart',[[x-25,y],[x+25,y]]);
+let previousZoom=zoom;
+for(let i=1;i<=20;i++){send('touchmove',[[x-25-i*3,y],[x+25+i*3,y]]);await frame();if(map.getZoom()>previousZoom+1e-5)zoomFrames++;previousZoom=map.getZoom();}
+send('touchend',[]);await pause(500);
+measurements.zoomFrames=zoomFrames;measurements.zoomDelta=map.getZoom()-zoom;
+measurements.pinchResize=resizeCalls.splice(0);
+if(zoomFrames<16||measurements.zoomDelta<1)failures.push(`Pinch failed: ${zoomFrames} moving frames, zoom delta ${measurements.zoomDelta}`);
+if(measurements.pinchResize.length)failures.push('Map resized during pinch');
+if(Math.abs(map.getBearing())>0.01||Math.abs(map.getPitch())>0.01)failures.push('Map rotated or tilted');
+measurements.touchAction=getComputedStyle(canvas).touchAction;
+if(measurements.touchAction!=='none')failures.push('Browser can take over map gestures');
+map.jumpTo(home);
+result.textContent=`${failures.length?'FAIL':'PASS'}: ${JSON.stringify(measurements)}\n${failures.join('\n')}`;
+</script></body></html>
