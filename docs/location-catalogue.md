@@ -588,19 +588,19 @@ Difficulty **2** · Point target · Research draft
 
 **Review:** Pin is the church building, not the surrounding churchyard. Suggested difficulty and Welsh wording need local review.
 
-## 42. Cardigan Library — Cardigan
+## 42. Library at the Council Offices (Morgan Street) — Cardigan
 
 Difficulty **2** · Point target · Research draft
 
-**English:** Cardigan Library is in the council offices on Morgan Street. Its collections include the Tivy-Side newspaper on microfilm.
+**English:** This target is the library at the council offices on Morgan Street, rather than the library in the arcade. Its collections include the Tivy-Side newspaper on microfilm.
 
-**Cymraeg:** Llyfrgell Aberteifi, Aberteifi. Mae Llyfrgell Aberteifi yn swyddfeydd y cyngor ar Stryd Morgan. Mae ei chasgliadau’n cynnwys papur newydd y Tivy-Side ar ficroffilm.
+**Cymraeg:** Llyfrgell Swyddfeydd y Cyngor (Stryd Morgan), Aberteifi. Y targed hwn yw’r llyfrgell yn swyddfeydd y cyngor ar Stryd Morgan, yn hytrach na’r llyfrgell yn yr arcêd. Mae ei chasgliadau’n cynnwys papur newydd y Tivy-Side ar ficroffilm.
 
 **Reference pin:** -4.6585941, 52.083166 ([map](https://www.openstreetmap.org/?mlat=52.083166&mlon=-4.6585941#map=18/52.083166/-4.6585941)) · OSM mapped node
 
 **Sources:** [fact](https://www.ceredigion.gov.uk/resident/tourism-leisure/ceredigion-library/branch-locations/cardigan/) · [coordinates](https://www.openstreetmap.org/node/5139658222)
 
-**Review:** Check the shared council-office/library building pin. This is the Morgan Street location. Suggested difficulty and Welsh wording need local review.
+**Review:** Target the library at the council offices on Morgan Street, not the library in the arcade. The arcade library’s current opening/closure status has not been confirmed. Check the shared council-office/library building pin and Welsh wording locally.
 
 ## 43. Crwst beach café — Poppit Sands
 

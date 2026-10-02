@@ -1092,18 +1092,18 @@
       ],
       "coordinateMethod": "OSM mapped node",
       "en": {
-        "name": "Cardigan Library",
+        "name": "Library at the Council Offices (Morgan Street)",
         "town": "Cardigan",
-        "fact": "Cardigan Library is in the council offices on Morgan Street. Its collections include the Tivy-Side newspaper on microfilm."
+        "fact": "This target is the library at the council offices on Morgan Street, rather than the library in the arcade. Its collections include the Tivy-Side newspaper on microfilm."
       },
       "cy": {
-        "name": "Llyfrgell Aberteifi",
+        "name": "Llyfrgell Swyddfeydd y Cyngor (Stryd Morgan)",
         "town": "Aberteifi",
-        "fact": "Mae Llyfrgell Aberteifi yn swyddfeydd y cyngor ar Stryd Morgan. Mae ei chasgliadau’n cynnwys papur newydd y Tivy-Side ar ficroffilm."
+        "fact": "Y targed hwn yw’r llyfrgell yn swyddfeydd y cyngor ar Stryd Morgan, yn hytrach na’r llyfrgell yn yr arcêd. Mae ei chasgliadau’n cynnwys papur newydd y Tivy-Side ar ficroffilm."
       },
       "source": "https://www.ceredigion.gov.uk/resident/tourism-leisure/ceredigion-library/branch-locations/cardigan/",
       "coordinateSource": "https://www.openstreetmap.org/node/5139658222",
-      "reviewNotes": "Check the shared council-office/library building pin. This is the Morgan Street location. Suggested difficulty and Welsh wording need local review.",
+      "reviewNotes": "Target the library at the council offices on Morgan Street, not the library in the arcade. The arcade library’s current opening/closure status has not been confirmed. Check the shared council-office/library building pin and Welsh wording locally.",
       "geometry": null
     },
     {
